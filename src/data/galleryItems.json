@@ -1,0 +1,44 @@
+{
+  "galleryItems": [
+    {
+      "label": "Interior",
+      "src": "/photos/interior-1.jpg",
+      "alt": "Last Hope Bar interior with neon We Are Here sign"
+    },
+    {
+      "label": "Neon",
+      "src": "/photos/neon.jpg",
+      "alt": "Blue neon sign and art wall"
+    },
+    {
+      "label": "Bar",
+      "src": "/photos/bar.jpg",
+      "alt": "The bar with bottles and disco ball"
+    },
+    {
+      "label": "Art Wall",
+      "src": "/photos/wall.jpg",
+      "alt": "Graffiti art wall with handprints"
+    },
+    {
+      "label": "Outside",
+      "src": "/photos/outside.jpg",
+      "alt": "Last Hope entrance from the street"
+    },
+    {
+      "label": "People",
+      "src": "/photos/crowd.jpg",
+      "alt": "Guests at Last Hope Bar"
+    },
+    {
+      "label": "Music",
+      "src": "/photos/music.jpg",
+      "alt": "Live music night at Last Hope"
+    },
+    {
+      "label": "Night",
+      "src": "/photos/night.jpg",
+      "alt": "Last Hope Bar at night"
+    }
+  ]
+}

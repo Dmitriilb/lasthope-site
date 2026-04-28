@@ -1,0 +1,52 @@
+{
+  "drinks": [
+    {
+      "category": "Signature",
+      "name": "Last Rites",
+      "desc": "Aged rum · tamarind syrup · Angostura bitters · smoked salt rim",
+      "price": "135,000 ₫"
+    },
+    {
+      "category": "Signature",
+      "name": "Saigon Drift",
+      "desc": "Lychee vodka · fresh lemongrass · kaffir lime · soda",
+      "price": "120,000 ₫"
+    },
+    {
+      "category": "Signature",
+      "name": "Midnight Garden",
+      "desc": "Gin · butterfly pea flower · tonic · mint · cucumber",
+      "price": "110,000 ₫"
+    },
+    {
+      "category": "Signature",
+      "name": "Red Dragon",
+      "desc": "Mezcal · dragon fruit · chili tincture · lime · agave",
+      "price": "140,000 ₫"
+    },
+    {
+      "category": "Classic",
+      "name": "Negroni",
+      "desc": "Campari · gin · sweet vermouth · orange peel",
+      "price": "120,000 ₫"
+    },
+    {
+      "category": "Classic",
+      "name": "Whisky Sour",
+      "desc": "Bourbon · lemon · egg white · Angostura",
+      "price": "115,000 ₫"
+    },
+    {
+      "category": "Beer",
+      "name": "Local Draft",
+      "desc": "Cold, fresh, Quy Nhơn night-approved",
+      "price": "35,000 ₫"
+    },
+    {
+      "category": "Soft",
+      "name": "Café Đen",
+      "desc": "Vietnamese drip coffee · black · no drama",
+      "price": "25,000 ₫"
+    }
+  ]
+}

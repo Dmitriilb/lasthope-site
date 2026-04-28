@@ -1,14 +1,6 @@
-/**
- * promo.js — Free drink promo code reveal
- *
- * How it works:
- *  - Code is blurred on load
- *  - User clicks "tap to reveal" → glitch animation → code appears
- *  - Copy button copies code to clipboard
- *  - Change PROMO_CODE below to update the code anytime
- */
+﻿import promoData from '../data/promo.json'
 
-const PROMO_CODE = 'WEAREHERE'
+const PROMO_CODE = promoData.promo.code || 'WEAREHERE'
 
 export function initPromo() {
   const revealBtn  = document.getElementById('promoRevealBtn')
@@ -59,7 +51,6 @@ export function initPromo() {
         copyBtn.classList.remove('copied')
       }, 2500)
     }).catch(() => {
-      // Fallback for older browsers
       const ta = document.createElement('textarea')
       ta.value = PROMO_CODE
       ta.style.position = 'fixed'
@@ -69,11 +60,13 @@ export function initPromo() {
       document.execCommand('copy')
       document.body.removeChild(ta)
       copyBtn.textContent = 'copied ✓'
-      setTimeout(() => { copyBtn.textContent = 'copy' }, 2500)
+      setTimeout(() => {
+        copyBtn.textContent = 'copy'
+        copyBtn.classList.remove('copied')
+      }, 2500)
     })
   })
 
-  // Keyboard support for copy button
   copyBtn.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') copyBtn.click()
   })
