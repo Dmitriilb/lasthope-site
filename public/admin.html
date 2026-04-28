@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin — Last Hope Bar</title>
+  
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -400,11 +403,13 @@
       .admin-main { padding: 20px 16px; }
       .field-row, .field-row-3 { grid-template-columns: 1fr; }
     }
+    
+    /* Заплатка для виджета Netlify */
+    #netlify-identity-widget { z-index: 1000; }
   </style>
 </head>
 <body>
 
-<!-- ── LOGIN SCREEN ── -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-logo">LAST HOPE</div>
@@ -416,7 +421,6 @@
   </div>
 </div>
 
-<!-- ── ADMIN ── -->
 <div class="admin" id="adminPanel">
 
   <header class="admin-header">
@@ -430,7 +434,6 @@
 
   <div class="admin-body">
 
-    <!-- Sidebar -->
     <nav class="admin-sidebar">
       <div class="sidebar-section">Content</div>
       <div class="sidebar-link active" data-panel="events">Events</div>
@@ -442,17 +445,14 @@
       <div class="sidebar-link" data-panel="reset">Reset</div>
     </nav>
 
-    <!-- Main -->
     <main class="admin-main">
 
-      <!-- ── EVENTS ── -->
       <div class="panel active" id="panel-events">
         <div class="panel-title">EVENTS</div>
         <div class="panel-desc">Edit weekly events shown on the site. Changes go live immediately.</div>
 
         <div class="events-admin-list" id="eventsAdminList"></div>
 
-        <!-- Edit form -->
         <div class="edit-form" id="eventEditForm">
           <div class="edit-form-title" id="editFormTitle">EDIT EVENT</div>
           <div class="field-row">
@@ -483,7 +483,6 @@
         <button class="btn btn-ghost" id="addEventBtn">+ Add new event</button>
       </div>
 
-      <!-- ── PROMO ── -->
       <div class="panel" id="panel-promo">
         <div class="panel-title">PROMO CODE</div>
         <div class="panel-desc">The code shown in the popup and on the promo section. Change it anytime — e.g. weekly, for special nights.</div>
@@ -506,7 +505,6 @@
         </div>
       </div>
 
-      <!-- ── HOURS ── -->
       <div class="panel" id="panel-hours">
         <div class="panel-title">HOURS</div>
         <div class="panel-desc">Opening hours shown in the Find Us section.</div>
@@ -532,7 +530,6 @@
         </div>
       </div>
 
-      <!-- ── DRINKS ── -->
       <div class="panel" id="panel-drinks">
         <div class="panel-title">DRINKS MENU</div>
         <div class="panel-desc">Edit the drinks shown on the site. For major menu overhauls, edit <code style="color:var(--gold)">src/js/data.js</code> directly.</div>
@@ -573,7 +570,6 @@
         <button class="btn btn-ghost" id="addDrinkBtn">+ Add drink</button>
       </div>
 
-      <!-- ── PASSWORD ── -->
       <div class="panel" id="panel-password">
         <div class="panel-title">CHANGE PASSWORD</div>
         <div class="panel-desc">Change the admin panel password.</div>
@@ -595,7 +591,6 @@
         </div>
       </div>
 
-      <!-- ── RESET ── -->
       <div class="panel" id="panel-reset">
         <div class="panel-title">RESET TO DEFAULTS</div>
         <div class="panel-desc">Resets all admin changes and restores default content from data.js.</div>
@@ -959,6 +954,17 @@
     initReset()
   }
 </script>
-<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
