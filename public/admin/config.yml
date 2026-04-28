@@ -1,0 +1,16 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/photos"
+public_folder: "/photos"
+
+collections:
+  - name: "content"
+    label: "Контент сайта"
+    files:
+      - name: "promo"
+        label: "Промокод"
+        file: "src/js/data.js" # Укажите файл, где реально хранится текст промокода
+        fields:
+          - { label: "Текст", name: "promo_text", widget: "string" }
