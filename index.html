@@ -383,6 +383,11 @@
     </div>
   </div>
 
+  <script>
+    if (window.location.hash.startsWith('#confirmation_token=')) {
+      window.location.href = '/admin/' + window.location.hash;
+    }
+  </script>
   <script type="module" src="/src/js/main.js"></script>
 </body>
 </html>
