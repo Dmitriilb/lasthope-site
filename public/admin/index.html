@@ -6,10 +6,13 @@
   <title>Last Hope Bar Admin</title>
   <meta name="robots" content="noindex, nofollow" />
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script>window.CMS_MANUAL_INIT = true;</script>
 </head>
 <body>
   <div id="nc-root"></div>
-  <!-- Netlify CMS will load config from /admin/config.yml -->
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script>
+    CMS.init({ config: '/admin/config.yml' })
+  </script>
 </body>
 </html>
