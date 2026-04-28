@@ -20,8 +20,10 @@ export default defineConfig({
       configureServer(server) {
         server.middlewares.use((req, res, next) => {
           const map = {
-            '/admin':  '/admin.html',
-            '/events': '/events.html',
+            '/admin':   '/admin/index.html',
+            '/admin/':  '/admin/index.html',
+            '/admin.html': '/admin/index.html',
+            '/events':  '/events.html',
           }
           if (map[req.url]) {
             req.url = map[req.url]

@@ -3,7 +3,9 @@
  * Checks localStorage for admin overrides first, falls back to data.js defaults.
  */
 
-import { drinks as defaultDrinks, events as defaultEvents, reviews as defaultReviews, galleryItems } from './data.js'
+import data from './data.json'
+
+const { drinks: defaultDrinks, events: defaultEvents, reviews: defaultReviews, galleryItems } = data
 
 // ── Load data: localStorage override or default ──
 function loadData(key, fallback) {

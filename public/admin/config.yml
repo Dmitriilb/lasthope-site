@@ -6,11 +6,65 @@ media_folder: "public/photos"
 public_folder: "/photos"
 
 collections:
-  - name: "content"
-    label: "Контент сайта"
+  - name: "site_data"
+    label: "Site data"
     files:
-      - name: "promo"
-        label: "Промокод"
-        file: "src/js/data.js" # Укажите файл, где реально хранится текст промокода
+      - name: "data_json"
+        label: "Site content"
+        file: "src/js/data.json"
         fields:
-          - { label: "Текст", name: "promo_text", widget: "string" }
+          - label: "Bar info"
+            name: "barInfo"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Address", name: "address", widget: "string" }
+              - { label: "Latitude", name: "lat", widget: "number" }
+              - { label: "Longitude", name: "lng", widget: "number" }
+              - { label: "Google Maps URL", name: "mapsUrl", widget: "string" }
+              - { label: "Instagram handle", name: "instagram", widget: "string" }
+              - { label: "Telegram placeholder", name: "telegram", widget: "string" }
+          - label: "Drinks"
+            name: "drinks"
+            widget: "list"
+            fields:
+              - { label: "Category", name: "category", widget: "string" }
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Description", name: "desc", widget: "text" }
+              - { label: "Price", name: "price", widget: "string" }
+          - label: "Events"
+            name: "events"
+            widget: "list"
+            fields:
+              - { label: "Day", name: "day", widget: "string" }
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Description", name: "desc", widget: "text" }
+              - { label: "Time", name: "time", widget: "string" }
+          - label: "Reviews"
+            name: "reviews"
+            widget: "list"
+            fields:
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Source", name: "source", widget: "string" }
+          - label: "Gallery"
+            name: "galleryItems"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Image URL", name: "src", widget: "string" }
+              - { label: "Alt text", name: "alt", widget: "string" }
+          - label: "Promo"
+            name: "promo"
+            widget: "object"
+            fields:
+              - { label: "Code", name: "code", widget: "string" }
+              - { label: "Deal", name: "deal", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - label: "Hours"
+            name: "hours"
+            widget: "object"
+            fields:
+              - { label: "Mon–Thu", name: "monThu", widget: "string" }
+              - { label: "Fri–Sat", name: "friSat", widget: "string" }
+              - { label: "Sunday", name: "sun", widget: "string" }
+              - { label: "Happy hour", name: "happy", widget: "string" }
