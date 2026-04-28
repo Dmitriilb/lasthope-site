@@ -8,12 +8,14 @@ import eventsData from '../data/events.json'
 import reviewsData from '../data/reviews.json'
 import galleryData from '../data/galleryItems.json'
 import hoursData from '../data/hours.json'
+import aboutPhotoData from '../data/aboutPhoto.json'
 
 const defaultDrinks = drinksData.drinks
 const defaultEvents = eventsData.events
 const defaultReviews = reviewsData.reviews
 const galleryItems = galleryData.galleryItems
 const hours = hoursData.hours
+const aboutPhoto = aboutPhotoData.aboutPhoto
 
 // ── Drinks ──
 export function renderDrinks() {
@@ -96,4 +98,13 @@ export function renderGallery() {
       <span class="gallery-item-label">${item.label}</span>
     </div>
   `).join('')
+}
+
+export function renderAboutPhoto() {
+  const img = document.getElementById('aboutPhotoImg')
+  const frame = document.getElementById('aboutPhotoFrame')
+  if (!img || !frame) return
+  if (aboutPhoto.src) img.src = aboutPhoto.src
+  if (aboutPhoto.alt) img.alt = aboutPhoto.alt
+  if (aboutPhoto.label) frame.dataset.label = aboutPhoto.label
 }

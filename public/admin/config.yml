@@ -27,6 +27,22 @@ collections:
               - { label: "Instagram handle", name: "instagram", widget: "string" }
               - { label: "Telegram placeholder", name: "telegram", widget: "string" }
 
+  - name: "about_photo"
+    label: "About photo"
+    files:
+      - name: "about_photo"
+        label: "About photo"
+        file: "src/data/aboutPhoto.json"
+        format: "json"
+        fields:
+          - label: "About photo"
+            name: "aboutPhoto"
+            widget: "object"
+            fields:
+              - { label: "Image", name: "src", widget: "image", allow_multiple: false }
+              - { label: "Alt text", name: "alt", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+
   - name: "drinks"
     label: "Drinks"
     files:
@@ -91,6 +107,7 @@ collections:
               - { label: "Label", name: "label", widget: "string" }
               - { label: "Image", name: "src", widget: "image", allow_multiple: false }
               - { label: "Alt text", name: "alt", widget: "string" }
+              - { label: "Section", name: "section", widget: "string", required: false, hint: "Optional group name like 'A place that exists' or 'The Place'" }
 
   - name: "promo"
     label: "Promo"

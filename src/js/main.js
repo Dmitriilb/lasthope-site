@@ -10,7 +10,7 @@
 
 import '../css/main.css'
 import { initNav } from './nav.js'
-import { renderDrinks, renderEvents, renderReviews, renderGallery, renderHours } from './render.js'
+import { renderDrinks, renderEvents, renderReviews, renderGallery, renderHours, renderAboutPhoto } from './render.js'
 import { initFab } from './fab.js'
 import { initReveal, initHeroGlitch, initParallax } from './animations.js'
 import { initPromo } from './promo.js'
@@ -18,6 +18,7 @@ import { initPopup } from './popup.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   // Render dynamic content first (so reveal targets exist)
+  renderAboutPhoto()
   renderDrinks()
   renderEvents()
   renderReviews()
