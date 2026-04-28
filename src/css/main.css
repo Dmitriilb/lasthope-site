@@ -436,9 +436,18 @@ body::before {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(242,240,235,0.12);
+  width: 100%;
+  max-width: 560px;
 }
-.photo-frame--tall { aspect-ratio: 3/4; }
-..photo-frame img {
+.about-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.photo-frame--tall {
+  aspect-ratio: 3/4;
+  max-height: min(80vh, 680px);
+}
+.photo-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
