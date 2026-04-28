@@ -1,28 +1,10 @@
 {
   "events": [
     {
-      "day": "WED",
+      "day": "FRIDAY",
       "name": "Open Mic Night",
       "desc": "Bring your guitar, your voice or just your ears. Anyone welcome on stage.",
-      "time": "8 PM"
-    },
-    {
-      "day": "FRI",
-      "name": "DJ No Genre",
-      "desc": "Resident DJ spins from soul to techno. No dress code. No rules.",
       "time": "9 PM"
-    },
-    {
-      "day": "SAT",
-      "name": "Live Band",
-      "desc": "Rotating local and visiting bands. Check Instagram for this week's lineup.",
-      "time": "8:30 PM"
-    },
-    {
-      "day": "SUN",
-      "name": "Slow Sunday",
-      "desc": "Acoustic sessions, 2-for-1 cocktails before 8 PM. Come in pyjamas.",
-      "time": "5 PM"
     }
   ]
 }
