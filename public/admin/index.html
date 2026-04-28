@@ -9,9 +9,32 @@
   <script>window.CMS_MANUAL_INIT = true;</script>
 </head>
 <body>
+  <div id="adminUserBanner" style="position:fixed;top:12px;right:12px;z-index:2000;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.75);color:#fff;font-family:system-ui, sans-serif;font-size:13px;backdrop-filter:blur(8px);">
+    Logged in as: <span id="adminUserName">checking...</span>
+  </div>
   <div id="nc-root"></div>
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
   <script>
+    function updateAdminUserName() {
+      const target = document.getElementById('adminUserName')
+      if (!target || !window.netlifyIdentity) return
+      const user = window.netlifyIdentity.currentUser && window.netlifyIdentity.currentUser()
+      if (user) {
+        target.textContent = user.user_metadata && user.user_metadata.full_name || user.email || 'Unknown'
+      } else {
+        target.textContent = 'not signed in'
+      }
+    }
+
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('login', updateAdminUserName)
+      window.netlifyIdentity.on('logout', updateAdminUserName)
+    }
+
+    window.addEventListener('load', () => {
+      updateAdminUserName()
+    })
+
     CMS.init({ config: '/admin/config.yml' })
   </script>
 </body>
