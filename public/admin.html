@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Last Hope Bar</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0a0a;
+      --bg2:     #141414;
+      --bg3:     #1e1e1e;
+      --border:  rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.15);
+      --white:   #f2f0eb;
+      --gray:    #888;
+      --gray2:   #555;
+      --gold:    #c9a84c;
+      --red:     #e05555;
+      --green:   #4caf7d;
+      --ff:      'Space Mono', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--ff);
+      font-size: 13px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN ── */
+    .login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-box {
+      width: 100%;
+      max-width: 360px;
+      border: 1px solid var(--border2);
+      padding: 40px 32px;
+      background: var(--bg2);
+    }
+    .login-logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .login-sub {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gray);
+      margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+    .login-label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .login-input {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--ff);
+      font-size: 14px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .login-input:focus { border-color: var(--border2); }
+    .login-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--white);
+      color: var(--bg);
+      border: none;
+      font-family: var(--ff);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .login-btn:hover { opacity: .85; }
+    .login-error {
+      font-size: 11px;
+      color: var(--red);
+      margin-top: 12px;
+      display: none;
+      letter-spacing: 1px;
+    }
+    .login-error.visible { display: block; }
+
+    /* ── ADMIN LAYOUT ── */
+    .admin { display: none; }
+    .admin.visible { display: block; }
+
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .admin-header-logo {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+    .admin-header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .admin-preview-link {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .admin-preview-link:hover { color: var(--white); }
+    .logout-btn {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      cursor: pointer;
+      font-family: var(--ff);
+      text-transform: uppercase;
+      transition: color .2s, border-color .2s;
+    }
+    .logout-btn:hover { color: var(--white); border-color: var(--border2); }
+
+    .admin-body {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      min-height: calc(100vh - 57px);
+    }
+
+    /* ── SIDEBAR ── */
+    .admin-sidebar {
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+      background: var(--bg2);
+    }
+    .sidebar-section {
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: var(--gray2);
+      text-transform: uppercase;
+      padding: 0 20px 8px;
+      margin-top: 16px;
+    }
+    .sidebar-link {
+      display: block;
+      padding: 10px 20px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--gray);
+      cursor: pointer;
+      transition: color .15s, background .15s;
+      border-left: 2px solid transparent;
+    }
+    .sidebar-link:hover { color: var(--white); background: rgba(255,255,255,0.03); }
+    .sidebar-link.active { color: var(--white); border-left-color: var(--gold); background: rgba(255,255,255,0.04); }
+
+    /* ── MAIN CONTENT ── */
+    .admin-main {
+      padding: 32px;
+      overflow-y: auto;
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .panel-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .panel-desc {
+      font-size: 11px;
+      color: var(--gray);
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    /* ── FORM ELEMENTS ── */
+    .field {
+      margin-bottom: 20px;
+    }
+    .field label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--ff);
+      font-size: 13px;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color .2s;
+      resize: vertical;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus { border-color: var(--border2); }
+    .field select option { background: var(--bg3); }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .field-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      padding: 10px 22px;
+      font-family: var(--ff);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: opacity .2s;
+    }
+    .btn:hover { opacity: .8; }
+    .btn-primary { background: var(--white); color: var(--bg); }
+    .btn-danger  { background: var(--red);   color: var(--white); }
+    .btn-ghost   { background: transparent; color: var(--gray); border: 1px solid var(--border); }
+    .btn-ghost:hover { color: var(--white); border-color: var(--border2); opacity: 1; }
+    .btn-sm { padding: 6px 14px; font-size: 10px; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--green);
+      color: #0a0a0a;
+      padding: 12px 20px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all .25s;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ── EVENTS LIST ── */
+    .events-admin-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 24px;
+    }
+    .event-admin-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+    .event-admin-day {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+    .event-admin-name {
+      font-size: 13px;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .event-admin-desc {
+      font-size: 11px;
+      color: var(--gray);
+    }
+    .event-admin-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* ── EDIT FORM ── */
+    .edit-form {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      padding: 24px;
+      margin-bottom: 24px;
+      display: none;
+    }
+    .edit-form.visible { display: block; }
+    .edit-form-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .edit-form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    /* ── PROMO & HOURS ── */
+    .save-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 28px 0;
+    }
+
+    /* ── STATUS BADGE ── */
+    .status-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--green);
+    }
+    .status-live::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+
+    @media (max-width: 700px) {
+      .admin-body { grid-template-columns: 1fr; }
+      .admin-sidebar { border-right: none; border-bottom: 1px solid var(--border); padding: 12px 0; }
+      .admin-sidebar { display: flex; overflow-x: auto; gap: 0; }
+      .sidebar-section { display: none; }
+      .sidebar-link { white-space: nowrap; border-left: none; border-bottom: 2px solid transparent; padding: 10px 16px; }
+      .sidebar-link.active { border-left-color: transparent; border-bottom-color: var(--gold); }
+      .admin-main { padding: 20px 16px; }
+      .field-row, .field-row-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN SCREEN ── -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">LAST HOPE</div>
+    <div class="login-sub">Admin Panel</div>
+    <label class="login-label" for="passwordInput">Password</label>
+    <input class="login-input" type="password" id="passwordInput" placeholder="Enter password" autocomplete="current-password" />
+    <button class="login-btn" id="loginBtn">Enter</button>
+    <div class="login-error" id="loginError">Wrong password. Try again.</div>
+  </div>
+</div>
+
+<!-- ── ADMIN ── -->
+<div class="admin" id="adminPanel">
+
+  <header class="admin-header">
+    <div class="admin-header-logo">LAST HOPE // ADMIN</div>
+    <div class="admin-header-right">
+      <span class="status-live">LIVE</span>
+      <a class="admin-preview-link" href="/" target="_blank">View site ↗</a>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <div class="admin-body">
+
+    <!-- Sidebar -->
+    <nav class="admin-sidebar">
+      <div class="sidebar-section">Content</div>
+      <div class="sidebar-link active" data-panel="events">Events</div>
+      <div class="sidebar-link" data-panel="promo">Promo Code</div>
+      <div class="sidebar-link" data-panel="hours">Hours</div>
+      <div class="sidebar-link" data-panel="drinks">Drinks</div>
+      <div class="sidebar-section">Settings</div>
+      <div class="sidebar-link" data-panel="password">Password</div>
+      <div class="sidebar-link" data-panel="reset">Reset</div>
+    </nav>
+
+    <!-- Main -->
+    <main class="admin-main">
+
+      <!-- ── EVENTS ── -->
+      <div class="panel active" id="panel-events">
+        <div class="panel-title">EVENTS</div>
+        <div class="panel-desc">Edit weekly events shown on the site. Changes go live immediately.</div>
+
+        <div class="events-admin-list" id="eventsAdminList"></div>
+
+        <!-- Edit form -->
+        <div class="edit-form" id="eventEditForm">
+          <div class="edit-form-title" id="editFormTitle">EDIT EVENT</div>
+          <div class="field-row">
+            <div class="field">
+              <label>Day (e.g. WED, FRI)</label>
+              <input type="text" id="editDay" placeholder="WED" maxlength="10" />
+            </div>
+            <div class="field">
+              <label>Time (e.g. 8 PM)</label>
+              <input type="text" id="editTime" placeholder="8 PM" maxlength="20" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Event name</label>
+            <input type="text" id="editName" placeholder="Open Mic Night" />
+          </div>
+          <div class="field">
+            <label>Description</label>
+            <textarea id="editDesc" rows="3" placeholder="Short description..."></textarea>
+          </div>
+          <div class="edit-form-actions">
+            <button class="btn btn-primary" id="saveEventBtn">Save Event</button>
+            <button class="btn btn-ghost" id="cancelEditBtn">Cancel</button>
+            <button class="btn btn-danger btn-sm" id="deleteEventBtn" style="margin-left:auto">Delete</button>
+          </div>
+        </div>
+
+        <button class="btn btn-ghost" id="addEventBtn">+ Add new event</button>
+      </div>
+
+      <!-- ── PROMO ── -->
+      <div class="panel" id="panel-promo">
+        <div class="panel-title">PROMO CODE</div>
+        <div class="panel-desc">The code shown in the popup and on the promo section. Change it anytime — e.g. weekly, for special nights.</div>
+
+        <div class="field">
+          <label>Promo code</label>
+          <input type="text" id="promoCodeInput" placeholder="WEAREHERE" style="font-size:20px;letter-spacing:4px;font-weight:700;text-transform:uppercase" />
+        </div>
+        <div class="field">
+          <label>Offer text</label>
+          <input type="text" id="promoDealInput" placeholder="2 beers, pay for 1 — any night" />
+        </div>
+        <div class="field">
+          <label>Popup body text</label>
+          <textarea id="promoBodyInput" rows="2" placeholder="Show up, say the code to the bartender."></textarea>
+        </div>
+        <div class="save-bar">
+          <button class="btn btn-primary" id="savePromoBtn">Save Promo</button>
+          <span style="font-size:11px;color:var(--gray)">Updates popup & promo section</span>
+        </div>
+      </div>
+
+      <!-- ── HOURS ── -->
+      <div class="panel" id="panel-hours">
+        <div class="panel-title">HOURS</div>
+        <div class="panel-desc">Opening hours shown in the Find Us section.</div>
+
+        <div class="field">
+          <label>Mon — Thu</label>
+          <input type="text" id="hours_monThu" placeholder="5 PM — 2 AM" />
+        </div>
+        <div class="field">
+          <label>Fri — Sat</label>
+          <input type="text" id="hours_friSat" placeholder="5 PM — 4 AM" />
+        </div>
+        <div class="field">
+          <label>Sunday</label>
+          <input type="text" id="hours_sun" placeholder="3 PM — 1 AM" />
+        </div>
+        <div class="field">
+          <label>Happy Hour text</label>
+          <input type="text" id="hours_happy" placeholder="Every day 5–7 PM" />
+        </div>
+        <div class="save-bar">
+          <button class="btn btn-primary" id="saveHoursBtn">Save Hours</button>
+        </div>
+      </div>
+
+      <!-- ── DRINKS ── -->
+      <div class="panel" id="panel-drinks">
+        <div class="panel-title">DRINKS MENU</div>
+        <div class="panel-desc">Edit the drinks shown on the site. For major menu overhauls, edit <code style="color:var(--gold)">src/js/data.js</code> directly.</div>
+        <div id="drinksAdminList"></div>
+        <div class="edit-form" id="drinkEditForm">
+          <div class="edit-form-title" id="drinkEditTitle">EDIT DRINK</div>
+          <div class="field-row">
+            <div class="field">
+              <label>Category</label>
+              <select id="editDrinkCat">
+                <option>Signature</option>
+                <option>Classic</option>
+                <option>Beer</option>
+                <option>Soft</option>
+                <option>Wine</option>
+                <option>Shot</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Price</label>
+              <input type="text" id="editDrinkPrice" placeholder="120,000 ₫" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Name</label>
+            <input type="text" id="editDrinkName" placeholder="Saigon Drift" />
+          </div>
+          <div class="field">
+            <label>Description (ingredients)</label>
+            <textarea id="editDrinkDesc" rows="2" placeholder="Vodka · lemongrass · lime · soda"></textarea>
+          </div>
+          <div class="edit-form-actions">
+            <button class="btn btn-primary" id="saveDrinkBtn">Save Drink</button>
+            <button class="btn btn-ghost" id="cancelDrinkBtn">Cancel</button>
+            <button class="btn btn-danger btn-sm" id="deleteDrinkBtn" style="margin-left:auto">Delete</button>
+          </div>
+        </div>
+        <button class="btn btn-ghost" id="addDrinkBtn">+ Add drink</button>
+      </div>
+
+      <!-- ── PASSWORD ── -->
+      <div class="panel" id="panel-password">
+        <div class="panel-title">CHANGE PASSWORD</div>
+        <div class="panel-desc">Change the admin panel password.</div>
+        <div class="field">
+          <label>Current password</label>
+          <input type="password" id="currentPwd" />
+        </div>
+        <div class="field">
+          <label>New password</label>
+          <input type="password" id="newPwd" />
+        </div>
+        <div class="field">
+          <label>Confirm new password</label>
+          <input type="password" id="confirmPwd" />
+        </div>
+        <div class="save-bar">
+          <button class="btn btn-primary" id="savePwdBtn">Change Password</button>
+          <span id="pwdMsg" style="font-size:11px;color:var(--red);display:none"></span>
+        </div>
+      </div>
+
+      <!-- ── RESET ── -->
+      <div class="panel" id="panel-reset">
+        <div class="panel-title">RESET TO DEFAULTS</div>
+        <div class="panel-desc">Resets all admin changes and restores default content from data.js.</div>
+        <div style="background:var(--bg2);border:1px solid rgba(224,85,85,0.3);padding:20px;margin-bottom:24px">
+          <p style="font-size:12px;color:var(--gray);margin-bottom:8px">This will reset:</p>
+          <p style="font-size:11px;color:var(--gray2);line-height:2">
+            Events · Drinks · Promo code · Hours
+          </p>
+        </div>
+        <button class="btn btn-danger" id="resetBtn">Reset everything to defaults</button>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">Saved</div>
+
+<script>
+  // ── CONFIG ──
+  const DEFAULT_PASSWORD = 'lasthope2025'
+  const STORAGE_KEYS = ['lh_events','lh_drinks','lh_promo','lh_hours']
+
+  // ── Default data (mirrors data.js) ──
+  const DEFAULT_EVENTS = [
+    { day:'WED', name:'Open Mic Night',  desc:'Bring your guitar, your voice or just your ears. Anyone welcome on stage.', time:'8 PM' },
+    { day:'FRI', name:'DJ No Genre',     desc:'Resident DJ spins from soul to techno. No dress code. No rules.', time:'9 PM' },
+    { day:'SAT', name:'Live Band',       desc:"Rotating local and visiting bands. Check Instagram for this week's lineup.", time:'8:30 PM' },
+    { day:'SUN', name:'Slow Sunday',     desc:'Acoustic sessions, 2-for-1 cocktails before 8 PM. Come in pyjamas.', time:'5 PM' },
+  ]
+  const DEFAULT_DRINKS = [
+    { category:'Signature', name:'Last Rites',     desc:'Aged rum · tamarind syrup · Angostura bitters · smoked salt rim', price:'135,000 ₫' },
+    { category:'Signature', name:'Saigon Drift',   desc:'Lychee vodka · fresh lemongrass · kaffir lime · soda', price:'120,000 ₫' },
+    { category:'Signature', name:'Midnight Garden',desc:'Gin · butterfly pea flower · tonic · mint · cucumber', price:'110,000 ₫' },
+    { category:'Signature', name:'Red Dragon',     desc:'Mezcal · dragon fruit · chili tincture · lime · agave', price:'140,000 ₫' },
+    { category:'Classic',   name:'Negroni',        desc:'Campari · gin · sweet vermouth · orange peel', price:'120,000 ₫' },
+    { category:'Classic',   name:'Whisky Sour',    desc:'Bourbon · lemon · egg white · Angostura', price:'115,000 ₫' },
+    { category:'Beer',      name:'Local Draft',    desc:'Cold, fresh, Da Nang night-approved', price:'35,000 ₫' },
+    { category:'Soft',      name:'Café Đen',       desc:'Vietnamese drip coffee · black · no drama', price:'25,000 ₫' },
+  ]
+  const DEFAULT_PROMO = { code:'WEAREHERE', deal:'2 beers, pay for 1 — any night', body:'Show up, say the code to the bartender.\nFirst drink is on us.' }
+  const DEFAULT_HOURS = { monThu:'5 PM — 2 AM', friSat:'5 PM — 4 AM', sun:'3 PM — 1 AM', happy:'Every day 5–7 PM' }
+
+  // ── Storage helpers ──
+  function load(key, fallback) {
+    try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback } catch { return fallback }
+  }
+  function save(key, val) { localStorage.setItem(key, JSON.stringify(val)) }
+
+  // ── Password ──
+  function getPassword() { return localStorage.getItem('lh_admin_pwd') || DEFAULT_PASSWORD }
+
+  // ── Toast ──
+  function showToast(msg = 'Saved ✓') {
+    const t = document.getElementById('toast')
+    t.textContent = msg
+    t.classList.add('show')
+    setTimeout(() => t.classList.remove('show'), 2200)
+  }
+
+  // ── Login ──
+  const loginScreen = document.getElementById('loginScreen')
+  const adminPanel  = document.getElementById('adminPanel')
+  const loginBtn    = document.getElementById('loginBtn')
+  const loginError  = document.getElementById('loginError')
+  const passwordInput = document.getElementById('passwordInput')
+
+  function tryLogin() {
+    if (passwordInput.value === getPassword()) {
+      loginScreen.style.display = 'none'
+      adminPanel.classList.add('visible')
+      initAdmin()
+    } else {
+      loginError.classList.add('visible')
+      passwordInput.value = ''
+      passwordInput.focus()
+    }
+  }
+
+  loginBtn.addEventListener('click', tryLogin)
+  passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin() })
+
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    adminPanel.classList.remove('visible')
+    loginScreen.style.display = ''
+    passwordInput.value = ''
+    loginError.classList.remove('visible')
+  })
+
+  // ── Sidebar navigation ──
+  function initNav() {
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'))
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'))
+        link.classList.add('active')
+        document.getElementById('panel-' + link.dataset.panel)?.classList.add('active')
+      })
+    })
+  }
+
+  // ────────────────────────────────────
+  // EVENTS
+  // ────────────────────────────────────
+  let events = []
+  let editingEventIdx = null
+
+  function initEvents() {
+    events = load('lh_events', DEFAULT_EVENTS)
+    renderEventsList()
+
+    document.getElementById('addEventBtn').addEventListener('click', () => {
+      editingEventIdx = null
+      document.getElementById('editFormTitle').textContent = 'ADD EVENT'
+      document.getElementById('editDay').value   = ''
+      document.getElementById('editTime').value  = ''
+      document.getElementById('editName').value  = ''
+      document.getElementById('editDesc').value  = ''
+      document.getElementById('deleteEventBtn').style.display = 'none'
+      document.getElementById('eventEditForm').classList.add('visible')
+      document.getElementById('editDay').focus()
+    })
+
+    document.getElementById('saveEventBtn').addEventListener('click', () => {
+      const item = {
+        day:  document.getElementById('editDay').value.trim().toUpperCase() || 'TBD',
+        time: document.getElementById('editTime').value.trim() || '',
+        name: document.getElementById('editName').value.trim() || 'Untitled',
+        desc: document.getElementById('editDesc').value.trim() || '',
+      }
+      if (editingEventIdx === null) {
+        events.push(item)
+      } else {
+        events[editingEventIdx] = item
+      }
+      save('lh_events', events)
+      renderEventsList()
+      document.getElementById('eventEditForm').classList.remove('visible')
+      showToast('Event saved ✓')
+    })
+
+    document.getElementById('cancelEditBtn').addEventListener('click', () => {
+      document.getElementById('eventEditForm').classList.remove('visible')
+    })
+
+    document.getElementById('deleteEventBtn').addEventListener('click', () => {
+      if (editingEventIdx === null) return
+      if (!confirm('Delete this event?')) return
+      events.splice(editingEventIdx, 1)
+      save('lh_events', events)
+      renderEventsList()
+      document.getElementById('eventEditForm').classList.remove('visible')
+      showToast('Deleted')
+    })
+  }
+
+  function renderEventsList() {
+    const list = document.getElementById('eventsAdminList')
+    if (!events.length) { list.innerHTML = '<p style="color:var(--gray);font-size:12px">No events. Add one below.</p>'; return }
+    list.innerHTML = events.map((e, i) => `
+      <div class="event-admin-item">
+        <div class="event-admin-day">${e.day}</div>
+        <div>
+          <div class="event-admin-name">${e.name} <span style="color:var(--gray);font-size:11px">· ${e.time}</span></div>
+          <div class="event-admin-desc">${e.desc}</div>
+        </div>
+        <div class="event-admin-actions">
+          <button class="btn btn-ghost btn-sm" onclick="editEvent(${i})">Edit</button>
+        </div>
+      </div>
+    `).join('')
+  }
+
+  window.editEvent = function(idx) {
+    editingEventIdx = idx
+    const e = events[idx]
+    document.getElementById('editFormTitle').textContent = 'EDIT EVENT'
+    document.getElementById('editDay').value   = e.day
+    document.getElementById('editTime').value  = e.time
+    document.getElementById('editName').value  = e.name
+    document.getElementById('editDesc').value  = e.desc
+    document.getElementById('deleteEventBtn').style.display = 'inline-block'
+    document.getElementById('eventEditForm').classList.add('visible')
+    document.getElementById('editName').focus()
+  }
+
+  // ────────────────────────────────────
+  // DRINKS
+  // ────────────────────────────────────
+  let drinks = []
+  let editingDrinkIdx = null
+
+  function initDrinks() {
+    drinks = load('lh_drinks', DEFAULT_DRINKS)
+    renderDrinksList()
+
+    document.getElementById('addDrinkBtn').addEventListener('click', () => {
+      editingDrinkIdx = null
+      document.getElementById('drinkEditTitle').textContent = 'ADD DRINK'
+      document.getElementById('editDrinkCat').value   = 'Signature'
+      document.getElementById('editDrinkName').value  = ''
+      document.getElementById('editDrinkDesc').value  = ''
+      document.getElementById('editDrinkPrice').value = ''
+      document.getElementById('deleteDrinkBtn').style.display = 'none'
+      document.getElementById('drinkEditForm').classList.add('visible')
+    })
+
+    document.getElementById('saveDrinkBtn').addEventListener('click', () => {
+      const item = {
+        category: document.getElementById('editDrinkCat').value,
+        name:     document.getElementById('editDrinkName').value.trim() || 'Untitled',
+        desc:     document.getElementById('editDrinkDesc').value.trim(),
+        price:    document.getElementById('editDrinkPrice').value.trim(),
+      }
+      if (editingDrinkIdx === null) { drinks.push(item) }
+      else { drinks[editingDrinkIdx] = item }
+      save('lh_drinks', drinks)
+      renderDrinksList()
+      document.getElementById('drinkEditForm').classList.remove('visible')
+      showToast('Drink saved ✓')
+    })
+
+    document.getElementById('cancelDrinkBtn').addEventListener('click', () => {
+      document.getElementById('drinkEditForm').classList.remove('visible')
+    })
+
+    document.getElementById('deleteDrinkBtn').addEventListener('click', () => {
+      if (editingDrinkIdx === null) return
+      if (!confirm('Delete this drink?')) return
+      drinks.splice(editingDrinkIdx, 1)
+      save('lh_drinks', drinks)
+      renderDrinksList()
+      document.getElementById('drinkEditForm').classList.remove('visible')
+      showToast('Deleted')
+    })
+  }
+
+  function renderDrinksList() {
+    const list = document.getElementById('drinksAdminList')
+    list.innerHTML = drinks.map((d, i) => `
+      <div class="event-admin-item" style="margin-bottom:2px">
+        <div class="event-admin-day" style="font-size:10px;color:var(--gray)">${d.category}</div>
+        <div>
+          <div class="event-admin-name">${d.name} <span style="color:var(--gold);font-size:11px">· ${d.price}</span></div>
+          <div class="event-admin-desc">${d.desc}</div>
+        </div>
+        <div class="event-admin-actions">
+          <button class="btn btn-ghost btn-sm" onclick="editDrink(${i})">Edit</button>
+        </div>
+      </div>
+    `).join('') + '<div style="margin-bottom:16px"></div>'
+  }
+
+  window.editDrink = function(idx) {
+    editingDrinkIdx = idx
+    const d = drinks[idx]
+    document.getElementById('drinkEditTitle').textContent  = 'EDIT DRINK'
+    document.getElementById('editDrinkCat').value   = d.category
+    document.getElementById('editDrinkName').value  = d.name
+    document.getElementById('editDrinkDesc').value  = d.desc
+    document.getElementById('editDrinkPrice').value = d.price
+    document.getElementById('deleteDrinkBtn').style.display = 'inline-block'
+    document.getElementById('drinkEditForm').classList.add('visible')
+  }
+
+  // ────────────────────────────────────
+  // PROMO
+  // ────────────────────────────────────
+  function initPromo() {
+    const p = load('lh_promo', DEFAULT_PROMO)
+    document.getElementById('promoCodeInput').value  = p.code  || DEFAULT_PROMO.code
+    document.getElementById('promoDealInput').value  = p.deal  || DEFAULT_PROMO.deal
+    document.getElementById('promoBodyInput').value  = p.body  || DEFAULT_PROMO.body
+
+    document.getElementById('savePromoBtn').addEventListener('click', () => {
+      save('lh_promo', {
+        code: document.getElementById('promoCodeInput').value.trim().toUpperCase() || DEFAULT_PROMO.code,
+        deal: document.getElementById('promoDealInput').value.trim(),
+        body: document.getElementById('promoBodyInput').value.trim(),
+      })
+      showToast('Promo saved ✓')
+    })
+  }
+
+  // ────────────────────────────────────
+  // HOURS
+  // ────────────────────────────────────
+  function initHours() {
+    const h = load('lh_hours', DEFAULT_HOURS)
+    document.getElementById('hours_monThu').value = h.monThu || DEFAULT_HOURS.monThu
+    document.getElementById('hours_friSat').value = h.friSat || DEFAULT_HOURS.friSat
+    document.getElementById('hours_sun').value    = h.sun    || DEFAULT_HOURS.sun
+    document.getElementById('hours_happy').value  = h.happy  || DEFAULT_HOURS.happy
+
+    document.getElementById('saveHoursBtn').addEventListener('click', () => {
+      save('lh_hours', {
+        monThu: document.getElementById('hours_monThu').value.trim(),
+        friSat: document.getElementById('hours_friSat').value.trim(),
+        sun:    document.getElementById('hours_sun').value.trim(),
+        happy:  document.getElementById('hours_happy').value.trim(),
+      })
+      showToast('Hours saved ✓')
+    })
+  }
+
+  // ────────────────────────────────────
+  // PASSWORD
+  // ────────────────────────────────────
+  function initPassword() {
+    document.getElementById('savePwdBtn').addEventListener('click', () => {
+      const cur  = document.getElementById('currentPwd').value
+      const nw   = document.getElementById('newPwd').value
+      const conf = document.getElementById('confirmPwd').value
+      const msg  = document.getElementById('pwdMsg')
+
+      if (cur !== getPassword()) { msg.textContent = 'Wrong current password'; msg.style.display='block'; return }
+      if (nw.length < 6)         { msg.textContent = 'Password too short (min 6)'; msg.style.display='block'; return }
+      if (nw !== conf)           { msg.textContent = 'Passwords do not match'; msg.style.display='block'; return }
+
+      localStorage.setItem('lh_admin_pwd', nw)
+      document.getElementById('currentPwd').value = ''
+      document.getElementById('newPwd').value = ''
+      document.getElementById('confirmPwd').value = ''
+      msg.style.display = 'none'
+      showToast('Password changed ✓')
+    })
+  }
+
+  // ────────────────────────────────────
+  // RESET
+  // ────────────────────────────────────
+  function initReset() {
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (!confirm('Reset ALL content to defaults? This cannot be undone.')) return
+      STORAGE_KEYS.forEach(k => localStorage.removeItem(k))
+      events = [...DEFAULT_EVENTS]
+      drinks = [...DEFAULT_DRINKS]
+      renderEventsList()
+      renderDrinksList()
+      document.getElementById('promoCodeInput').value  = DEFAULT_PROMO.code
+      document.getElementById('promoDealInput').value  = DEFAULT_PROMO.deal
+      document.getElementById('promoBodyInput').value  = DEFAULT_PROMO.body
+      document.getElementById('hours_monThu').value = DEFAULT_HOURS.monThu
+      document.getElementById('hours_friSat').value = DEFAULT_HOURS.friSat
+      document.getElementById('hours_sun').value    = DEFAULT_HOURS.sun
+      document.getElementById('hours_happy').value  = DEFAULT_HOURS.happy
+      showToast('Reset to defaults ✓')
+    })
+  }
+
+  // ────────────────────────────────────
+  // INIT
+  // ────────────────────────────────────
+  function initAdmin() {
+    initNav()
+    initEvents()
+    initDrinks()
+    initPromo()
+    initHours()
+    initPassword()
+    initReset()
+  }
+</script>
+</body>
+</html>

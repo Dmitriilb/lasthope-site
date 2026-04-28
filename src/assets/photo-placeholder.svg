@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <rect width="400" height="500" fill="#1a1a1a"/>
+  <pattern id="hatch" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)">
+    <line x1="0" y1="0" x2="0" y2="20" stroke="rgba(242,240,235,0.06)" stroke-width="1"/>
+  </pattern>
+  <rect width="400" height="500" fill="url(#hatch)"/>
+  <rect x="160" y="200" width="80" height="60" rx="2" fill="none" stroke="rgba(242,240,235,0.2)" stroke-width="1"/>
+  <circle cx="175" cy="218" r="6" fill="none" stroke="rgba(242,240,235,0.2)" stroke-width="1"/>
+  <polyline points="160,260 185,235 205,248 225,230 240,260" fill="none" stroke="rgba(242,240,235,0.2)" stroke-width="1"/>
+  <text x="200" y="300" font-family="monospace" font-size="10" fill="rgba(242,240,235,0.25)" text-anchor="middle" letter-spacing="3">ADD PHOTO</text>
+</svg>

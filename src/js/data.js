@@ -1,0 +1,125 @@
+/**
+ * data.js — Content configuration for Last Hope Bar
+ * Edit this file to update drinks, events and reviews.
+ */
+
+export const BAR_INFO = {
+  name: 'Last Hope Bar & Cafe',
+  address: '111 Châu Thị Vĩnh Tế, Ngũ Hành Sơn, Đà Nẵng 550000',
+  lat: 16.0493625,
+  lng: 108.2409343,
+  placeId: '0x3142170f9a6d8cc1:0x6b9bfbdd7bbd2751',
+  mapsUrl: 'https://www.google.com/maps/place/Last+Hope+Bar/@16.0493625,108.2409343,17z/?cid=7754868017897046865',
+  phone: '+84 xxx xxx xxxx',
+  instagram: 'lasthope.247',
+  telegram: 'lasthopebar',
+  zalo: '0xxxxxxxxx',
+}
+
+export const drinks = [
+  {
+    category: 'Signature',
+    name: 'Last Rites',
+    desc: 'Aged rum · tamarind syrup · Angostura bitters · smoked salt rim',
+    price: '135,000 ₫',
+  },
+  {
+    category: 'Signature',
+    name: 'Saigon Drift',
+    desc: 'Lychee vodka · fresh lemongrass · kaffir lime · soda',
+    price: '120,000 ₫',
+  },
+  {
+    category: 'Signature',
+    name: 'Midnight Garden',
+    desc: 'Gin · butterfly pea flower · tonic · mint · cucumber',
+    price: '110,000 ₫',
+  },
+  {
+    category: 'Signature',
+    name: 'Red Dragon',
+    desc: 'Mezcal · dragon fruit · chili tincture · lime · agave',
+    price: '140,000 ₫',
+  },
+  {
+    category: 'Classic',
+    name: 'Negroni',
+    desc: 'Campari · gin · sweet vermouth · orange peel',
+    price: '120,000 ₫',
+  },
+  {
+    category: 'Classic',
+    name: 'Whisky Sour',
+    desc: 'Bourbon · lemon · egg white · Angostura',
+    price: '115,000 ₫',
+  },
+  {
+    category: 'Beer',
+    name: 'Local Draft',
+    desc: 'Cold, fresh, Quy Nhơn night-approved',
+    price: '35,000 ₫',
+  },
+  {
+    category: 'Soft',
+    name: 'Café Đen',
+    desc: 'Vietnamese drip coffee · black · no drama',
+    price: '25,000 ₫',
+  },
+]
+
+export const events = [
+  {
+    day: 'WED',
+    name: 'Open Mic Night',
+    desc: 'Bring your guitar, your voice or just your ears. Anyone welcome on stage.',
+    time: '8 PM',
+  },
+  {
+    day: 'FRI',
+    name: 'DJ No Genre',
+    desc: 'Resident DJ spins from soul to techno. No dress code. No rules.',
+    time: '9 PM',
+  },
+  {
+    day: 'SAT',
+    name: 'Live Band',
+    desc: 'Rotating local and visiting bands. Check Instagram for this week\'s lineup.',
+    time: '8:30 PM',
+  },
+  {
+    day: 'SUN',
+    name: 'Slow Sunday',
+    desc: 'Acoustic sessions, 2-for-1 cocktails before 8 PM. Come in pyjamas.',
+    time: '5 PM',
+  },
+]
+
+export const reviews = [
+  {
+    text: '"The kind of bar that makes you forget you have a flight in the morning."',
+    source: 'TripAdvisor — ★★★★★',
+  },
+  {
+    text: '"Stumbled in, stayed four hours. The black cat judged me the whole time. 10/10."',
+    source: 'Google Reviews — ★★★★★',
+  },
+  {
+    text: '"Best cocktails in Quy Nhơn, best playlist, best vibe. Nothing else to say."',
+    source: 'Foody.vn — ★★★★★',
+  },
+  {
+    text: '"A true hidden gem. Art all over the walls, neon lights and a disco ball. Came back three nights in a row."',
+    source: 'Lonely Planet reader',
+  },
+]
+
+export const galleryItems = [
+  { label: 'Interior', src: '/photos/interior-1.jpg', alt: 'Last Hope Bar interior with neon We Are Here sign' },
+  { label: 'Neon', src: '/photos/neon.jpg', alt: 'Blue neon sign and art wall' },
+  { label: 'Bar', src: '/photos/bar.jpg', alt: 'The bar with bottles and disco ball' },
+  { label: 'Art Wall', src: '/photos/wall.jpg', alt: 'Graffiti art wall with handprints' },
+  { label: 'Outside', src: '/photos/outside.jpg', alt: 'Last Hope entrance from the street' },
+  { label: 'People', src: '/photos/crowd.jpg', alt: 'Guests at Last Hope Bar' },
+  { label: 'Music', src: '/photos/music.jpg', alt: 'Live music night at Last Hope' },
+  { label: 'Night', src: '/photos/night.jpg', alt: 'Last Hope Bar at night' },
+]

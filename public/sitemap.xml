@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- English (default) -->
+  <url>
+    <loc>https://lasthope.bar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lasthope.bar/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://lasthope.bar/vi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lasthope.bar/"/>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Vietnamese -->
+  <url>
+    <loc>https://lasthope.bar/vi/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://lasthope.bar/"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://lasthope.bar/vi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lasthope.bar/"/>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>

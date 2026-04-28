@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — Last Hope Bar</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #0a0a0a;
+      --bg2:    #141414;
+      --bg3:    #1e1e1e;
+      --white:  #f2f0eb;
+      --gray:   #888;
+      --gray2:  #444;
+      --border: rgba(242,240,235,0.1);
+      --red:    #e05555;
+      --green:  #4caf7d;
+      --gold:   #c9a84c;
+      --ff:     'Space Mono', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--ff);
+      font-size: 14px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    /* ── LOGIN ── */
+    .login { display: block; }
+    .app   { display: none; }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      margin-bottom: 4px;
+    }
+    .logo-sub {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    input[type="password"],
+    input[type="text"],
+    input[type="datetime-local"] {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--ff);
+      font-size: 14px;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color .2s;
+      -webkit-appearance: none;
+    }
+    input:focus { border-color: rgba(242,240,235,0.3); }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      opacity: 0.5;
+      cursor: pointer;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--white);
+      color: var(--bg);
+      border: none;
+      font-family: var(--ff);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity .2s;
+      margin-top: 16px;
+    }
+    .btn:hover { opacity: .85; }
+    .btn:active { opacity: .7; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--gray);
+      border: 1px solid var(--border);
+      margin-top: 0;
+    }
+    .btn-ghost:hover { color: var(--white); opacity: 1; }
+    .btn-danger {
+      background: transparent;
+      color: var(--red);
+      border: 1px solid rgba(224,85,85,0.3);
+      margin-top: 0;
+      width: auto;
+      padding: 10px 20px;
+    }
+    .btn-danger:hover { background: rgba(224,85,85,0.08); opacity: 1; }
+
+    .error {
+      font-size: 11px;
+      color: var(--red);
+      margin-top: 12px;
+      min-height: 16px;
+      letter-spacing: 1px;
+    }
+
+    /* ── APP HEADER ── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header-left .logo { margin-bottom: 2px; font-size: 16px; }
+    .header-left .logo-sub { margin-bottom: 0; }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .view-site {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .view-site:hover { color: var(--white); }
+    .logout {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      cursor: pointer;
+      font-family: var(--ff);
+      text-transform: uppercase;
+      transition: all .2s;
+    }
+    .logout:hover { color: var(--white); }
+
+    /* ── COUNTER ── */
+    .counter {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .counter span {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ── EVENTS LIST ── */
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 20px;
+    }
+
+    .event-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: border-color .2s;
+    }
+    .event-card:hover { border-color: rgba(242,240,235,0.2); }
+    .event-card.past { opacity: 0.4; }
+
+    .event-date-block {
+      flex-shrink: 0;
+      text-align: center;
+      width: 48px;
+    }
+    .event-date-day {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+    .event-date-month {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
+
+    .event-info { flex: 1; min-width: 0; }
+    .event-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 3px;
+    }
+    .event-time {
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 1px;
+    }
+    .event-badge {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+    .badge-soon  { background: rgba(201,168,76,0.15); color: var(--gold); }
+    .badge-today { background: rgba(76,175,125,0.15); color: var(--green); }
+    .badge-past  { background: rgba(136,136,136,0.1); color: var(--gray2); }
+
+    .event-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .icon-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--gray);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all .2s;
+      font-family: var(--ff);
+    }
+    .icon-btn:hover { border-color: rgba(242,240,235,0.3); color: var(--white); }
+    .icon-btn.delete:hover { border-color: rgba(224,85,85,0.5); color: var(--red); }
+
+    /* ── ADD / EDIT FORM ── */
+    .form-card {
+      background: var(--bg2);
+      border: 1px solid rgba(242,240,235,0.2);
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .form-title {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 18px;
+    }
+    .field { margin-bottom: 16px; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      align-items: center;
+    }
+    .form-save {
+      flex: 1;
+      padding: 11px;
+      background: var(--white);
+      color: var(--bg);
+      border: none;
+      font-family: var(--ff);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .form-save:hover { opacity: .85; }
+
+    .add-btn {
+      width: 100%;
+      padding: 13px;
+      background: transparent;
+      color: var(--gray);
+      border: 1px dashed var(--gray2);
+      font-family: var(--ff);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .add-btn:hover { border-color: var(--gray); color: var(--white); }
+    .add-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--gray);
+      font-size: 12px;
+      letter-spacing: 1px;
+      border: 1px dashed var(--gray2);
+      margin-bottom: 16px;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: var(--green);
+      color: #0a0a0a;
+      padding: 10px 24px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: all .25s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- LOGIN -->
+  <div class="login" id="loginView">
+    <div class="logo">LAST HOPE</div>
+    <div class="logo-sub">Events management</div>
+
+    <label for="pwd">Password</label>
+    <input type="password" id="pwd" placeholder="Enter password" autocomplete="current-password" />
+    <button class="btn" id="loginBtn">Enter</button>
+    <div class="error" id="loginErr"></div>
+  </div>
+
+  <!-- APP -->
+  <div class="app" id="appView">
+
+    <div class="header">
+      <div class="header-left">
+        <div class="logo">LAST HOPE</div>
+        <div class="logo-sub">Events management</div>
+      </div>
+      <div class="header-right">
+        <a href="/" target="_blank" class="view-site">View site ↗</a>
+        <button class="logout" id="logoutBtn">Exit</button>
+      </div>
+    </div>
+
+    <div class="counter" id="counter">Events: <span>0</span> / 5</div>
+
+    <!-- Events list -->
+    <div class="events-list" id="eventsList"></div>
+
+    <!-- Add/Edit form -->
+    <div class="form-card" id="formCard" style="display:none">
+      <div class="form-title" id="formTitle">Add event</div>
+      <div class="field">
+        <label for="evName">Event name</label>
+        <input type="text" id="evName" placeholder="Jazz Night, Open Mic, DJ Set..." maxlength="60" />
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="evDate">Date & time</label>
+          <input type="datetime-local" id="evDate" />
+        </div>
+        <div class="field">
+          <label for="evEnd">End time (optional)</label>
+          <input type="time" id="evEnd" placeholder="23:00" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="form-save" id="formSave">Save</button>
+        <button class="btn-ghost" id="formCancel" style="padding:10px 20px;background:transparent;color:var(--gray);border:1px solid var(--border);font-family:var(--ff);font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;">Cancel</button>
+        <button class="btn-danger" id="formDelete" style="display:none">Delete</button>
+      </div>
+    </div>
+
+    <!-- Add button -->
+    <button class="add-btn" id="addBtn">+ Add event</button>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const PASSWORD_KEY  = 'lh_admin_pwd'
+  const EVENTS_KEY    = 'lh_events_v2'
+  const DEFAULT_PWD   = 'lasthope2025'
+  const MAX_EVENTS    = 5
+
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+  const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+
+  // ── Storage ──
+  function getPwd()    { return localStorage.getItem(PASSWORD_KEY) || DEFAULT_PWD }
+  function getEvents() {
+    try { return JSON.parse(localStorage.getItem(EVENTS_KEY)) || [] } catch { return [] }
+  }
+  function saveEvents(evs) { localStorage.setItem(EVENTS_KEY, JSON.stringify(evs)) }
+
+  // ── Toast ──
+  function toast(msg) {
+    const t = document.getElementById('toast')
+    t.textContent = msg
+    t.classList.add('show')
+    setTimeout(() => t.classList.remove('show'), 2200)
+  }
+
+  // ── Login ──
+  const loginView = document.getElementById('loginView')
+  const appView   = document.getElementById('appView')
+  const pwdInput  = document.getElementById('pwd')
+  const loginErr  = document.getElementById('loginErr')
+
+  function doLogin() {
+    if (pwdInput.value === getPwd()) {
+      loginView.style.display = 'none'
+      appView.style.display = 'block'
+      renderEvents()
+    } else {
+      loginErr.textContent = 'Wrong password'
+      pwdInput.value = ''
+      pwdInput.focus()
+    }
+  }
+
+  document.getElementById('loginBtn').onclick = doLogin
+  pwdInput.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin() })
+
+  document.getElementById('logoutBtn').onclick = () => {
+    appView.style.display = 'none'
+    loginView.style.display = 'block'
+    pwdInput.value = ''
+    loginErr.textContent = ''
+  }
+
+  // ── Helpers ──
+  function formatDate(iso) {
+    const d = new Date(iso)
+    const day  = DAYS[d.getDay()]
+    const date = d.getDate()
+    const mon  = MONTHS[d.getMonth()]
+    const h    = d.getHours().toString().padStart(2,'0')
+    const m    = d.getMinutes().toString().padStart(2,'0')
+    return { day, date, mon, time: `${day}, ${h}:${m}`, full: `${day} ${date} ${mon}, ${h}:${m}` }
+  }
+
+  function getBadge(iso) {
+    const now  = Date.now()
+    const evMs = new Date(iso).getTime()
+    const diff = evMs - now
+    if (diff < 0)              return { cls: 'badge-past',  txt: 'Past' }
+    if (diff < 1000*60*60*24)  return { cls: 'badge-today', txt: 'Today' }
+    if (diff < 1000*60*60*48)  return { cls: 'badge-soon',  txt: 'Tomorrow' }
+    return null
+  }
+
+  function sortEvents(evs) {
+    return [...evs].sort((a, b) => new Date(a.datetime) - new Date(b.datetime))
+  }
+
+  // ── Render ──
+  function renderEvents() {
+    const evs = sortEvents(getEvents())
+    const list = document.getElementById('eventsList')
+    const counter = document.getElementById('counter')
+    const addBtn  = document.getElementById('addBtn')
+
+    counter.innerHTML = `Events: <span>${evs.length}</span> / ${MAX_EVENTS}`
+    addBtn.disabled = evs.length >= MAX_EVENTS
+
+    if (!evs.length) {
+      list.innerHTML = '<div class="empty">No events yet.<br>Add your first event below.</div>'
+      return
+    }
+
+    const now = Date.now()
+
+    list.innerHTML = evs.map((ev, i) => {
+      const f = formatDate(ev.datetime)
+      const badge = getBadge(ev.datetime)
+      const isPast = new Date(ev.datetime).getTime() < now
+      const endStr = ev.endTime ? ` — ${ev.endTime}` : ''
+
+      return `
+        <div class="event-card ${isPast ? 'past' : ''}">
+          <div class="event-date-block">
+            <div class="event-date-day">${f.date}</div>
+            <div class="event-date-month">${f.mon}</div>
+          </div>
+          <div class="event-info">
+            <div class="event-name">${ev.name}</div>
+            <div class="event-time">${f.time}${endStr}</div>
+          </div>
+          ${badge ? `<span class="event-badge ${badge.cls}">${badge.txt}</span>` : ''}
+          <div class="event-actions">
+            <button class="icon-btn" onclick="editEvent(${i})" title="Edit">✎</button>
+            <button class="icon-btn delete" onclick="deleteEvent(${i})" title="Delete">✕</button>
+          </div>
+        </div>
+      `
+    }).join('')
+  }
+
+  // ── Form ──
+  let editingIdx = null
+
+  function openForm(title, name='', datetime='', endTime='', showDelete=false) {
+    document.getElementById('formTitle').textContent = title
+    document.getElementById('evName').value    = name
+    document.getElementById('evDate').value    = datetime ? datetime.slice(0,16) : ''
+    document.getElementById('evEnd').value     = endTime || ''
+    document.getElementById('formDelete').style.display = showDelete ? 'inline-block' : 'none'
+    document.getElementById('formCard').style.display = 'block'
+    document.getElementById('evName').focus()
+    document.getElementById('formCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+  }
+
+  function closeForm() {
+    document.getElementById('formCard').style.display = 'none'
+    editingIdx = null
+  }
+
+  document.getElementById('addBtn').onclick = () => {
+    editingIdx = null
+    // Default datetime to tomorrow 20:00
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    tomorrow.setHours(20, 0, 0, 0)
+    const iso = tomorrow.toISOString().slice(0,16)
+    openForm('Add event', '', iso, '', false)
+  }
+
+  document.getElementById('formCancel').onclick = closeForm
+
+  document.getElementById('formSave').onclick = () => {
+    const name     = document.getElementById('evName').value.trim()
+    const datetime = document.getElementById('evDate').value
+    const endTime  = document.getElementById('evEnd').value.trim()
+
+    if (!name)     { document.getElementById('evName').focus(); return }
+    if (!datetime) { document.getElementById('evDate').focus(); return }
+
+    const evs = getEvents()
+
+    if (editingIdx !== null) {
+      // Find by original sorted index
+      const sorted = sortEvents(evs)
+      const original = evs.findIndex(e =>
+        e.name === sorted[editingIdx].name &&
+        e.datetime === sorted[editingIdx].datetime
+      )
+      if (original !== -1) evs[original] = { name, datetime, endTime }
+    } else {
+      if (evs.length >= MAX_EVENTS) return
+      evs.push({ name, datetime, endTime })
+    }
+
+    saveEvents(evs)
+    renderEvents()
+    closeForm()
+    toast(editingIdx !== null ? 'Event updated ✓' : 'Event added ✓')
+  }
+
+  document.getElementById('formDelete').onclick = () => {
+    if (editingIdx === null) return
+    if (!confirm('Delete this event?')) return
+    const evs    = getEvents()
+    const sorted = sortEvents(evs)
+    const idx    = evs.findIndex(e =>
+      e.name === sorted[editingIdx].name &&
+      e.datetime === sorted[editingIdx].datetime
+    )
+    if (idx !== -1) evs.splice(idx, 1)
+    saveEvents(evs)
+    renderEvents()
+    closeForm()
+    toast('Deleted')
+  }
+
+  window.editEvent = function(sortedIdx) {
+    editingIdx = sortedIdx
+    const sorted = sortEvents(getEvents())
+    const ev = sorted[sortedIdx]
+    openForm('Edit event', ev.name, ev.datetime, ev.endTime, true)
+  }
+
+  window.deleteEvent = function(sortedIdx) {
+    if (!confirm('Delete this event?')) return
+    const evs    = getEvents()
+    const sorted = sortEvents(evs)
+    const idx    = evs.findIndex(e =>
+      e.name === sorted[sortedIdx].name &&
+      e.datetime === sorted[sortedIdx].datetime
+    )
+    if (idx !== -1) evs.splice(idx, 1)
+    saveEvents(evs)
+    renderEvents()
+    toast('Deleted')
+  }
+</script>
+</body>
+</html>
