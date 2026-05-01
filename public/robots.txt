@@ -1,0 +1,54 @@
+# robots.txt — Last Hope Bar & Cafe
+# https://lasthope.bar
+
+# ── Standard crawlers ──
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+
+# ── Google ──
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+
+# ── AI crawlers / LLM training bots ──
+# GPTBot (OpenAI)
+User-agent: GPTBot
+Allow: /
+
+# ChatGPT-User (OpenAI browsing)
+User-agent: ChatGPT-User
+Allow: /
+
+# CCBot (Common Crawl — used by many LLM datasets)
+User-agent: CCBot
+Allow: /
+
+# Google-Extended (Gemini / Bard training)
+User-agent: Google-Extended
+Allow: /
+
+# anthropic-ai (Claude)
+User-agent: anthropic-ai
+Allow: /
+
+# PerplexityBot
+User-agent: PerplexityBot
+Allow: /
+
+# YouBot (You.com)
+User-agent: YouBot
+Allow: /
+
+# Bytespider (ByteDance / TikTok AI)
+User-agent: Bytespider
+Allow: /
+
+# ClaudeBot
+User-agent: ClaudeBot
+Allow: /
+
+# ── Sitemap ──
+Sitemap: https://lasthope.bar/sitemap.xml
