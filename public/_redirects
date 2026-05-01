@@ -1,4 +1,7 @@
-/admin   /admin/index.html   200
-/admin/  /admin/index.html   200
-/admin.html  /admin/index.html   200
-/events  /events.html  200
+/admin    /admin/index.html   200
+/admin/   /admin/index.html   200
+/admin.html  /admin/index.html  200
+/events   /events.html   200
+
+http://lasthopebar.com/*  https://lasthopebar.com/:splat  301!
+http://www.lasthopebar.com/*  https://lasthopebar.com/:splat  301!
