@@ -399,13 +399,14 @@
   </div>
 
   <script>
+    const h = window.location.hash;
     if (
-        window.location.hash.startsWith('#confirmation_token=') ||
-        window.location.hash.startsWith('#invite_token=') ||
-        window.location.hash.startsWith('#recovery_token=')
-      ) {
-        window.location.href = '/admin/' + window.location.hash;
-      }
+      h.startsWith('#confirmation_token=') ||
+      h.startsWith('#invite_token=') ||
+      h.startsWith('#recovery_token=')
+    ) {
+      window.location.href = '/admin/' + h;
+    }
   </script>
   <script type="module" src="/src/js/main.js"></script>
 </body>
