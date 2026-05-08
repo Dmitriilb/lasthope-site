@@ -3,39 +3,238 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Last Hope Bar Admin</title>
+  <title>Last Hope — Admin</title>
   <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>window.CMS_MANUAL_INIT = true;</script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── VARIABLES (matching main site) ── */
+    :root {
+      --black:   #0a0a0a;
+      --white:   #f2f0eb;
+      --gray-dk: #1a1a1a;
+      --gray-md: #2e2e2e;
+      --gray-lt: #888;
+      --gold:    #c9a84c;
+      --ff-display: 'Bebas Neue', 'Impact', sans-serif;
+      --ff-body:    'Space Mono', 'Courier New', monospace;
+    }
+
+    /* ── NOISE TEXTURE (same as main site) ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+      mix-blend-mode: overlay;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* ── TOP BAR ── */
+    #adminTopBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 3000;
+      height: 52px;
+      background: var(--black);
+      border-bottom: 1px solid var(--gray-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      gap: 16px;
+    }
+
+    /* Logo block */
+    #adminLogo {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    #adminLogo .logo-mark {
+      font-family: var(--ff-display);
+      font-size: 26px;
+      letter-spacing: 2px;
+      color: var(--white);
+      line-height: 1;
+    }
+    #adminLogo .logo-sep {
+      width: 1px;
+      height: 18px;
+      background: var(--gray-md);
+      flex-shrink: 0;
+      align-self: center;
+    }
+    #adminLogo .logo-sub {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray-lt);
+    }
+
+    /* Gold accent line under logo mark */
+    #adminLogo .logo-mark::after {
+      content: '';
+      display: block;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 2px;
+      opacity: 0.8;
+    }
+
+    /* User info block */
+    #adminUserInfo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      min-width: 0;
+    }
+
+    #adminUserLabel {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-lt);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    #adminUserName {
+      font-family: var(--ff-body);
+      font-size: 12px;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+    }
+
+    /* Logout button */
+    #adminLogoutBtn {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid var(--gray-md);
+      background: transparent;
+      color: var(--gray-lt);
+      font-family: var(--ff-body);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color .2s, color .2s, background .2s;
+      white-space: nowrap;
+    }
+    #adminLogoutBtn:hover {
+      border-color: var(--white);
+      color: var(--black);
+      background: var(--white);
+    }
+    #adminLogoutBtn svg {
+      flex-shrink: 0;
+      transition: color .2s;
+    }
+
+    /* ── CMS ROOT: push below top bar ── */
+    #nc-root {
+      padding-top: 52px;
+    }
+
+    /* ── Override Netlify CMS toolbar so it sits below our bar ── */
+    [class*="ToolbarContainer"],
+    [class*="AppHeader"],
+    header[class*="css-"] {
+      top: 52px !important;
+    }
+  </style>
 </head>
 <body>
-  <div id="adminUserBanner" style="position:fixed;top:12px;right:12px;z-index:2000;padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.75);color:#fff;font-family:system-ui, sans-serif;font-size:13px;backdrop-filter:blur(8px);">
-    Logged in as: <span id="adminUserName">checking...</span>
+
+  <!-- ═══ CUSTOM TOP BAR ═══ -->
+  <div id="adminTopBar">
+    <!-- Logo -->
+    <div id="adminLogo">
+      <div class="logo-mark">LAST HOPE</div>
+      <div class="logo-sep"></div>
+      <div class="logo-sub">Admin Panel</div>
+    </div>
+
+    <!-- User + Logout -->
+    <div id="adminUserInfo">
+      <span id="adminUserLabel">Logged in as</span>
+      <span id="adminUserName">checking…</span>
+      <button id="adminLogoutBtn" title="Log out">
+        <!-- door/exit icon -->
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Log out
+      </button>
+    </div>
   </div>
+
+  <!-- ═══ CMS ROOT ═══ -->
   <div id="nc-root"></div>
+
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
   <script>
+    // ── User name display ──
     function updateAdminUserName() {
-      const target = document.getElementById('adminUserName')
-      if (!target || !window.netlifyIdentity) return
-      const user = window.netlifyIdentity.currentUser && window.netlifyIdentity.currentUser()
+      const target = document.getElementById('adminUserName');
+      if (!target || !window.netlifyIdentity) return;
+      const user = window.netlifyIdentity.currentUser && window.netlifyIdentity.currentUser();
       if (user) {
-        target.textContent = user.user_metadata && user.user_metadata.full_name || user.email || 'Unknown'
+        target.textContent =
+          (user.user_metadata && user.user_metadata.full_name) ||
+          user.email ||
+          'Unknown';
+        document.getElementById('adminLogoutBtn').style.display = 'inline-flex';
       } else {
-        target.textContent = 'not signed in'
+        target.textContent = 'not signed in';
+        document.getElementById('adminLogoutBtn').style.display = 'none';
       }
     }
 
+    // ── Logout handler ──
+    document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.logout();
+      }
+    });
+
     if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('login', updateAdminUserName)
-      window.netlifyIdentity.on('logout', updateAdminUserName)
+      window.netlifyIdentity.on('login',  updateAdminUserName);
+      window.netlifyIdentity.on('logout', updateAdminUserName);
     }
 
-    window.addEventListener('load', () => {
-      updateAdminUserName()
-    })
+    window.addEventListener('load', updateAdminUserName);
 
-    CMS.init({ config: '/admin/config.yml' })
+    CMS.init({ config: '/admin/config.yml' });
   </script>
 </body>
 </html>
