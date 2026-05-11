@@ -89,6 +89,12 @@
       "name": "TEQUILA SHOT",
       "desc": "Classic",
       "price": "55,000"
+    },
+    {
+      "category": "SIGNATURE",
+      "name": "SMILE",
+      "desc": "SMILE FOR EVERYONE",
+      "price": "FREE"
     }
   ]
 }
