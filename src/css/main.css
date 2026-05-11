@@ -549,6 +549,51 @@ body::before {
   margin-top: 12px;
 }
 
+/* ── Drink photo ── */
+.drink-photo-wrap {
+  margin: -clamp(20px, 3vw, 32px) -clamp(20px, 3vw, 32px) clamp(16px, 2vw, 20px);
+}
+.drink-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 600px) {
+  .drink-photo {
+    aspect-ratio: unset;
+    height: 200px;
+  }
+}
+
+/* ── Drinks collapse ── */
+.drink-card.drink-hidden {
+  display: none;
+}
+
+.drinks-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.drinks-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(242,240,235,0.25);
+  color: var(--white);
+  font-family: var(--ff-display);
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.drinks-toggle-btn:hover {
+  background: var(--gray-dk);
+  border-color: rgba(242,240,235,0.5);
+}
+
 /* ══════════════════════════════════════
    GALLERY / VIBES
 ══════════════════════════════════════ */

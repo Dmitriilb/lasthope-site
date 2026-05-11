@@ -1,4 +1,4 @@
-﻿backend:
+backend:
   name: git-gateway
   branch: main
 
@@ -59,6 +59,7 @@ collections:
               - { label: "Name", name: "name", widget: "string" }
               - { label: "Description", name: "desc", widget: "text" }
               - { label: "Price", name: "price", widget: "string" }
+              - { label: "Photo", name: "photo", widget: "image", allow_multiple: false, required: false, hint: "Optional. Upload a drink photo." }
 
   - name: "events"
     label: "Events"

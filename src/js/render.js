@@ -17,18 +17,53 @@ const galleryItems = galleryData.galleryItems
 const hours = hoursData.hours
 const aboutPhoto = aboutPhotoData.aboutPhoto
 
+const DRINKS_PREVIEW = 8
+
 // ── Drinks ──
 export function renderDrinks() {
   const grid = document.getElementById('drinksGrid')
   if (!grid) return
+
   grid.innerHTML = defaultDrinks.map((d, i) => `
-    <article class="drink-card" role="listitem" data-num="${String(i + 1).padStart(2, '0')}">
+    <article class="drink-card${d.photo ? ' drink-card--has-photo' : ''}${i >= DRINKS_PREVIEW ? ' drink-hidden' : ''}" role="listitem" data-num="${String(i + 1).padStart(2, '0')}">
+      ${d.photo ? `<div class="drink-photo-wrap"><img class="drink-photo" src="${d.photo}" alt="${d.name}" loading="lazy" onerror="this.closest('.drink-photo-wrap').style.display='none'"></div>` : ''}
       <p class="drink-cat">${d.category}</p>
       <h3 class="drink-name">${d.name}</h3>
       <p class="drink-desc">${d.desc}</p>
       <p class="drink-price">${d.price}</p>
     </article>
   `).join('')
+
+  // Render toggle button only if there are more than DRINKS_PREVIEW drinks
+  const toggleWrap = document.getElementById('drinksToggleWrap')
+  if (!toggleWrap) return
+
+  if (defaultDrinks.length > DRINKS_PREVIEW) {
+    const remaining = defaultDrinks.length - DRINKS_PREVIEW
+    toggleWrap.innerHTML = `
+      <button class="drinks-toggle-btn" aria-expanded="false">
+        Full menu\u00a0(+${remaining})
+      </button>
+    `
+    toggleWrap.querySelector('.drinks-toggle-btn').addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true'
+
+      if (!expanded) {
+        grid.querySelectorAll('.drink-hidden').forEach(card => card.classList.remove('drink-hidden'))
+        this.setAttribute('aria-expanded', 'true')
+        this.textContent = 'Show less'
+      } else {
+        Array.from(grid.children).forEach((card, i) => {
+          if (i >= DRINKS_PREVIEW) card.classList.add('drink-hidden')
+        })
+        this.setAttribute('aria-expanded', 'false')
+        this.textContent = `Full menu\u00a0(+${remaining})`
+        document.getElementById('drinks').scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    })
+  } else {
+    toggleWrap.innerHTML = ''
+  }
 }
 
 // ── Events ──
