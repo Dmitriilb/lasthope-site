@@ -1,52 +1,34 @@
 {
   "drinks": [
     {
-      "category": "Signature",
-      "name": "Last Hope Negroni",
-      "desc": "Dry gin · sweet vermouth · Campari · orange zest",
-      "price": "99,000 ₫"
+      "category": "SIGNATURE",
+      "name": "COCO BUZZ",
+      "desc": "Malibu Rum, Vodka, Real Espresso, Creamy Coconut",
+      "price": "150000"
     },
     {
-      "category": "Signature",
-      "name": "Last Hope Lychee Signature",
-      "desc": "Lychee vodka · fresh lemongrass · kaffir lime · soda",
-      "price": "120,000 ₫"
+      "category": "SIGNATURE",
+      "name": "COCKTAIL SMOOTHIE",
+      "desc": "Tropical Fruits, White Rum, Coconut Water",
+      "price": "150000"
     },
     {
-      "category": "Signature",
-      "name": "Midnight Garden",
-      "desc": "Gin · butterfly pea flower · tonic · mint · cucumber",
-      "price": "110,000 ₫"
+      "category": "SPECIAL",
+      "name": "ESPRESSO MARTINI",
+      "desc": "Vodka, Espresso, Coffee Liqueur",
+      "price": "120000"
     },
     {
-      "category": "Signature",
-      "name": "Red Dragon",
-      "desc": "Mezcal · dragon fruit · chili tincture · lime · agave",
-      "price": "140,000 ₫"
+      "category": "SPECIAL",
+      "name": "LONG ISLAND",
+      "desc": "Vodka, Tequila, White Rum, Triple Sec, Gin, Lemon, Cola",
+      "price": "120000"
     },
     {
-      "category": "Classic",
-      "name": "Negroni",
-      "desc": "Campari · gin · sweet vermouth · orange peel",
-      "price": "120,000 ₫"
-    },
-    {
-      "category": "Classic",
-      "name": "Whisky Sour",
-      "desc": "Bourbon · lemon · egg white · Angostura",
-      "price": "115,000 ₫"
-    },
-    {
-      "category": "Beer",
-      "name": "Local Draft",
-      "desc": "Cold, fresh, Quy Nhơn night-approved",
-      "price": "35,000 ₫"
-    },
-    {
-      "category": "Soft",
-      "name": "Café Đen",
-      "desc": "Vietnamese drip coffee · black · no drama",
-      "price": "25,000 ₫"
+      "category": "COCKTAIL",
+      "name": "TEQUILA SUNRISE",
+      "desc": "Classic",
+      "price": "90000"
     }
   ]
 }
