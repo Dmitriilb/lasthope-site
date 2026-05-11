@@ -1,9 +1,10 @@
 {
   "hours": {
     "schedule": [
-      { "days": "Mon — Thu", "time": "5 PM — 4 AM" },
-      { "days": "Fri — Sat", "time": "5 PM — 4 AM" },
-      { "days": "Sunday",    "time": "5 PM — 4 AM" }
+      {
+        "days": "Mon — Sun",
+        "time": "5 PM — 4 AM"
+      }
     ],
     "happy": {
       "enabled": true,
