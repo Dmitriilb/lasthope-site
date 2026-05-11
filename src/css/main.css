@@ -1219,8 +1219,10 @@ body::before {
   .nav-links { display: none; }
   .burger { display: flex; }
 
-  .event-item { grid-template-columns: 60px 1fr; }
+  .event-item { grid-template-columns: 80px 1fr; }
   .event-time { display: none; }
+  .event-day { display: flex; flex-direction: column; gap: 4px; }
+  .event-day::after { font-size: 10px; letter-spacing: 1px; color: var(--gray-lt); content: attr(data-time); }
 }
 
 @media (max-width: 480px) {

@@ -42,7 +42,7 @@ export function renderDrinks() {
     const remaining = defaultDrinks.length - DRINKS_PREVIEW
     toggleWrap.innerHTML = `
       <button class="drinks-toggle-btn" aria-expanded="false">
-        Show more\u00a0(+${remaining})
+        Full menu\u00a0(+${remaining})
       </button>
     `
     toggleWrap.querySelector('.drinks-toggle-btn').addEventListener('click', function () {
@@ -87,7 +87,7 @@ export function renderEvents() {
 
   list.innerHTML = events.map(e => `
       <article class="event-item reveal">
-        <div class="event-day">${e.day}</div>
+        <div class="event-day" data-time="${e.time}">${e.day}</div>
         <div>
           <h3 class="event-name">${e.name}</h3>
           <p class="event-desc">${e.desc || ''}</p>
