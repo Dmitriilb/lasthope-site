@@ -42,7 +42,7 @@ export function renderDrinks() {
     const remaining = defaultDrinks.length - DRINKS_PREVIEW
     toggleWrap.innerHTML = `
       <button class="drinks-toggle-btn" aria-expanded="false">
-        Full menu\u00a0(+${remaining})
+        Show more\u00a0(+${remaining})
       </button>
     `
     toggleWrap.querySelector('.drinks-toggle-btn').addEventListener('click', function () {
