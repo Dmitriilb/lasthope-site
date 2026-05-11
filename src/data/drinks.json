@@ -4,91 +4,91 @@
       "category": "SIGNATURE",
       "name": "COCO BUZZ",
       "desc": "Malibu Rum, Vodka, Real Espresso, Creamy Coconut",
-      "price": "150000"
+      "price": "150,000"
     },
     {
       "category": "SIGNATURE",
       "name": "COCKTAIL SMOOTHIE",
       "desc": "Tropical Fruits, White Rum, Coconut Water",
-      "price": "150000"
+      "price": "150,000"
     },
     {
       "category": "SPECIAL",
       "name": "ESPRESSO MARTINI",
       "desc": "Vodka, Espresso, Coffee Liqueur",
-      "price": "120000"
+      "price": "120,000"
     },
     {
       "category": "SPECIAL",
       "name": "LONG ISLAND",
       "desc": "Vodka, Tequila, White Rum, Triple Sec, Gin, Lemon, Cola",
-      "price": "120000"
+      "price": "120,000"
     },
     {
       "category": "COCKTAIL",
       "name": "TEQUILA SUNRISE",
       "desc": "Classic",
-      "price": "90000"
+      "price": "90,000"
     },
     {
       "category": "COCKTAIL",
       "name": "GIN TONIC",
       "desc": "Classic",
-      "price": "90000"
+      "price": "90,000"
     },
     {
       "category": "COCKTAIL",
       "name": "MOJITO",
       "desc": "Classic",
-      "price": "90000"
+      "price": "90,000"
     },
     {
       "category": "COCKTAIL",
       "name": "MALIBU ORANGE",
       "desc": "Classic",
-      "price": "90000"
+      "price": "90,000"
     },
     {
       "category": "SPECIAL",
       "name": "CUPID'S ARROW",
       "desc": "Vodka, Triple Sec, Strawberry & Grenadine, Orange, Lime, Soda",
-      "price": "120000"
+      "price": "120,000"
     },
     {
       "category": "SPECIAL",
       "name": "PINACOLADA",
       "desc": "Malibu Rum, Rich Coconut Cream, Pineapple Juice",
-      "price": "120000"
+      "price": "120,000"
     },
     {
       "category": "SPECIAL",
       "name": "MARGARITA",
       "desc": "Tequila, Triple Sec, Fresh Lime Juice",
-      "price": "120000"
+      "price": "120,000"
     },
     {
       "category": "SPECIAL",
       "name": "WHISKEY SOUR",
       "desc": "Bourbon Whiskey, Lemon Juice, Egg White",
-      "price": "120000"
+      "price": "120,000"
     },
     {
       "category": "SPECIAL",
       "name": "NEGRONI",
       "desc": "Gin, Campari, Sweet Vermouth",
-      "price": "120000"
+      "price": "120,000"
     },
     {
       "category": "SPECIAL",
       "name": "COCONUT SUNSET",
       "desc": "Malibu Rum, Pineapple Juice, Splash of Grenadine",
-      "price": "120000"
+      "price": "120,000"
     },
     {
       "category": "SHOTS",
       "name": "TEQUILA SHOT",
       "desc": "Classic",
-      "price": "55000"
+      "price": "55,000"
     }
   ]
 }
