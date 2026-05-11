@@ -1,5 +1,6 @@
 {
   "hours": {
+<<<<<<< HEAD
     "schedule": [
       { "days": "Mon — Thu", "time": "5 PM — 2 AM" },
       { "days": "Fri — Sat", "time": "5 PM — 4 AM" },
@@ -9,5 +10,11 @@
       "enabled": true,
       "text": "Every day 5–7 PM"
     }
+=======
+    "monThu": "5 PM — 4 AM",
+    "friSat": "5 PM — 4 AM",
+    "sun": "5 PM — 4 AM",
+    "happy": "1AM - 2AM"
+>>>>>>> 941c55359a9c8fb98a004bc4337865c60bc2f102
   }
 }

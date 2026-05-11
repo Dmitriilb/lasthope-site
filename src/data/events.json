@@ -1,10 +1,22 @@
 {
   "events": [
     {
+      "day": "MONDAY",
+      "name": "MOVIE NIGHT",
+      "time": "8 PM",
+      "desc": "Sometimes you just need a break. Every Monday, we drop the projector screen, kill the main lights, and turn Last Hope into an underground cinema. \nWe play everything from cult classics and gritty action flicks to massive blockbusters. Grab some popcorn (it’s on us), order a heavy cocktail, and sink into the vibe. \n**Rule:** No loud talking during the best scenes.\n**Time:** Every Monday, 8:30 PM"
+    },
+    {
+      "day": "WEDNESDAY",
+      "name": "GAMING NIGHT",
+      "time": "8 PM",
+      "desc": "We’ve got an outdoor TV, a laptop, a microphone, and ice-cold beer. The rest is up to you.\nEvery Wednesday, Last Hope turns into an open-air broadcast arena. Whether it’s an E-sports match, FIFA, or some chaotic fighting game, we’re putting it on the big screen.\nBut here’s the catch: We don't just sit and watch. We need players, and we need a voice. \nAnyone can step up, grab the mic, and be the Host (Shoutcaster) for the night. Trash talk is allowed. Terrible commentary is highly encouraged. Or, step up to the game and show everyone what you've got.\nYou play, you cast, we all drink. Welcome to the most interactive and raw gaming night in Da Nang.\n**Rule:** The louder the commentator, the better the night. Free shot for the MVP.\n**Time:** Every Wednesday, 8:00 PM"
+    },
+    {
       "day": "FRIDAY",
       "name": "Open Mic Night",
-      "desc": "Bring your guitar, your voice or just your ears. Anyone welcome on stage.",
-      "time": "9 PM"
+      "desc": "This isn't a stadium, and we don't care if you hit every note perfectly. \nEvery Friday night, the stage at Last Hope is yours. Bring your guitar, sing a cover, or just come to enjoy the live music with a cold beer from our bar.\n\nSome nights it's raw acoustic sets from travelers passing through Da Nang. Other nights it's our regulars turning the place into a full-blown living room jam session. \n\n**Rule #1:** No judgment. \n**Rule #2:** If you perform a song, the bartender might just slide a free shot your way.\n\nSign-up starts at 8:00 PM. The music starts when it starts. Come as you are.",
+      "time": "8 PM"
     }
   ]
 }
