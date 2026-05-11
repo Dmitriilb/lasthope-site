@@ -137,7 +137,16 @@ collections:
             name: "hours"
             widget: "object"
             fields:
-              - { label: "Mon–Thu", name: "monThu", widget: "string" }
-              - { label: "Fri–Sat", name: "friSat", widget: "string" }
-              - { label: "Sunday", name: "sun", widget: "string" }
-              - { label: "Happy hour", name: "happy", widget: "string" }
+              - label: "Schedule"
+                name: "schedule"
+                widget: "list"
+                label_singular: "Row"
+                fields:
+                  - { label: "Days", name: "days", widget: "string", hint: "e.g. Mon — Thu" }
+                  - { label: "Time", name: "time", widget: "string", hint: "e.g. 5 PM — 2 AM" }
+              - label: "Happy hour"
+                name: "happy"
+                widget: "object"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Text", name: "text", widget: "string", hint: "e.g. Every day 5–7 PM" }

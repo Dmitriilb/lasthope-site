@@ -16,7 +16,7 @@
   <meta name="description" content="Last Hope Bar & Cafe in Đà Nẵng — an underground hideout with live music, cold drinks, art walls and good people. Open nightly. 111 Châu Thị Vĩnh Tế, Ngũ Hành Sơn." />
   <meta name="keywords" content="Last Hope Bar, bar Da Nang, cafe bar Da Nang, quán bar Đà Nẵng, nightlife Da Nang, bar Ngu Hanh Son, underground bar Da Nang, Last Hope Bar Cafe" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://lasthopebar.com/" />
+  <link rel="canonical" href="https://lasthope.bar/" />
 
   <!-- Hreflang -->
   <link rel="alternate" hreflang="en" href="https://lasthope.bar/" />
@@ -164,8 +164,12 @@
               <span class="stamp-lbl">reasons<br>to stay</span>
             </div>
             <div class="stamp">
-              <span class="stamp-num">2</span>
-              <span class="stamp-lbl">cute<br>animals</span>
+              <span class="stamp-num">1</span>
+              <span class="stamp-lbl">black<br>cat</span>
+            </div>
+            <div class="stamp">
+              <span class="stamp-num">1</span>
+              <span class="stamp-lbl">black<br>dog</span>
             </div>
           </div>
         </div>
@@ -277,10 +281,8 @@
         <div class="findus-left">
           <div class="hours-block">
             <p class="hours-title">Hours</p>
-            <div class="hours-row"><span>Mon — Thu</span><span>5 PM — 2 AM</span></div>
-            <div class="hours-row"><span>Fri — Sat</span><span>5 PM — 4 AM</span></div>
-            <div class="hours-row"><span>Sunday</span><span>3 PM — 1 AM</span></div>
-            <div class="happy-hour-tag">HAPPY HOUR: Every day 5–7 PM</div>
+            <div id="hoursRows"></div>
+            <div class="happy-hour-tag"></div>
           </div>
           <div class="contact-block">
             <a class="contact-row" href="https://www.google.com/maps?q=Last+Hope+Bar+%26+Cafe,+111+Ch%C3%A2u+Th%E1%BB%8B+V%C4%A9nh+T%E1%BA%BF,+%C4%90%C3%A0+N%E1%BA%B5ng" target="_blank" rel="noopener">
@@ -395,13 +397,14 @@
   </div>
 
   <script>
+    const h = window.location.hash;
     if (
-        window.location.hash.startsWith('#confirmation_token=') ||
-        window.location.hash.startsWith('#invite_token=') ||
-        window.location.hash.startsWith('#recovery_token=')
-      ) {
-        window.location.href = '/admin/' + window.location.hash;
-      }
+      h.startsWith('#confirmation_token=') ||
+      h.startsWith('#invite_token=') ||
+      h.startsWith('#recovery_token=')
+    ) {
+      window.location.href = '/admin/' + h;
+    }
   </script>
   <script type="module" src="/src/js/main.js"></script>
 </body>

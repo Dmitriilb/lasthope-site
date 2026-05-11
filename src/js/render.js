@@ -76,12 +76,22 @@ export function renderReviews() {
 
 // ── Hours ──
 export function renderHours() {
-  const rows = document.querySelectorAll('.hours-row')
-  if (rows[0]) rows[0].querySelector('span:last-child').textContent = hours.monThu || ''
-  if (rows[1]) rows[1].querySelector('span:last-child').textContent = hours.friSat || ''
-  if (rows[2]) rows[2].querySelector('span:last-child').textContent = hours.sun || ''
+  const block = document.getElementById('hoursRows')
+  if (block && hours.schedule && hours.schedule.length) {
+    block.innerHTML = hours.schedule.map(r =>
+      `<div class="hours-row"><span>${r.days}</span><span>${r.time}</span></div>`
+    ).join('')
+  }
   const happyTag = document.querySelector('.happy-hour-tag')
-  if (happyTag && hours.happy) happyTag.textContent = `HAPPY HOUR: ${hours.happy}`
+  if (happyTag) {
+    const h = hours.happy
+    if (h && h.enabled && h.text) {
+      happyTag.textContent = `HAPPY HOUR: ${h.text}`
+      happyTag.style.display = ''
+    } else {
+      happyTag.style.display = 'none'
+    }
+  }
 }
 
 export function renderGallery() {

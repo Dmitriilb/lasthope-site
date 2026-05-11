@@ -1,8 +1,13 @@
 {
   "hours": {
-    "monThu": "5 PM — 2 AM",
-    "friSat": "5 PM — 4 AM",
-    "sun": "3 PM — 1 AM",
-    "happy": "Every day 5–7 PM"
+    "schedule": [
+      { "days": "Mon — Thu", "time": "5 PM — 2 AM" },
+      { "days": "Fri — Sat", "time": "5 PM — 4 AM" },
+      { "days": "Sunday",    "time": "3 PM — 1 AM" }
+    ],
+    "happy": {
+      "enabled": true,
+      "text": "Every day 5–7 PM"
+    }
   }
 }
