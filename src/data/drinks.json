@@ -2,6 +2,12 @@
   "drinks": [
     {
       "category": "SIGNATURE",
+      "name": "SMILE",
+      "desc": "SMILE FOR EVERYONE",
+      "price": "FREE"
+    },
+    {
+      "category": "SIGNATURE",
       "name": "COCO BUZZ",
       "desc": "Malibu Rum, Vodka, Real Espresso, Creamy Coconut",
       "price": "150,000"
@@ -23,30 +29,6 @@
       "name": "LONG ISLAND",
       "desc": "Vodka, Tequila, White Rum, Triple Sec, Gin, Lemon, Cola",
       "price": "120,000"
-    },
-    {
-      "category": "COCKTAIL",
-      "name": "TEQUILA SUNRISE",
-      "desc": "Classic",
-      "price": "90,000"
-    },
-    {
-      "category": "COCKTAIL",
-      "name": "GIN TONIC",
-      "desc": "Classic",
-      "price": "90,000"
-    },
-    {
-      "category": "COCKTAIL",
-      "name": "MOJITO",
-      "desc": "Classic",
-      "price": "90,000"
-    },
-    {
-      "category": "COCKTAIL",
-      "name": "MALIBU ORANGE",
-      "desc": "Classic",
-      "price": "90,000"
     },
     {
       "category": "SPECIAL",
@@ -85,16 +67,34 @@
       "price": "120,000"
     },
     {
+      "category": "COCKTAIL",
+      "name": "TEQUILA SUNRISE",
+      "desc": "Classic",
+      "price": "90,000"
+    },
+    {
+      "category": "COCKTAIL",
+      "name": "GIN TONIC",
+      "desc": "Classic",
+      "price": "90,000"
+    },
+    {
+      "category": "COCKTAIL",
+      "name": "MOJITO",
+      "desc": "Classic",
+      "price": "90,000"
+    },
+    {
+      "category": "COCKTAIL",
+      "name": "MALIBU ORANGE",
+      "desc": "Classic",
+      "price": "90,000"
+    },
+    {
       "category": "SHOTS",
       "name": "TEQUILA SHOT",
       "desc": "Classic",
       "price": "55,000"
-    },
-    {
-      "category": "SIGNATURE",
-      "name": "SMILE",
-      "desc": "SMILE FOR EVERYONE",
-      "price": "FREE"
     }
   ]
 }
