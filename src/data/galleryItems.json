@@ -12,8 +12,8 @@
     },
     {
       "label": "Bar",
-      "src": "/photos/bar.jpg",
-      "alt": "The bar with bottles and disco ball"
+      "src": "/photos/bar_counter_blue.jpg",
+      "alt": "The bar with bottles"
     },
     {
       "label": "Art Wall",
@@ -22,12 +22,12 @@
     },
     {
       "label": "Outside",
-      "src": "/photos/outside.jpg",
+      "src": "/photos/20260309_234246.jpg",
       "alt": "Last Hope entrance from the street"
     },
     {
       "label": "People",
-      "src": "/photos/crowd.jpg",
+      "src": "/photos/20260310_001429.jpg",
       "alt": "Guests at Last Hope Bar"
     },
     {
@@ -37,7 +37,7 @@
     },
     {
       "label": "Night",
-      "src": "/photos/night.jpg",
+      "src": "/photos/01_메인_2층에서본_손님uno.jpeg",
       "alt": "Last Hope Bar at night"
     }
   ]
