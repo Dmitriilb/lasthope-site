@@ -5,14 +5,14 @@
       "name": "SMILE",
       "desc": "SMILE FOR EVERYONE",
       "price": "FREE",
-      "photo": ""
+      "photo": "/photos/20260310_001429.jpg"
     },
     {
       "category": "SIGNATURE",
       "name": "COCO BUZZ",
       "desc": "Malibu Rum, Vodka, Real Espresso, Creamy Coconut",
       "price": "150,000",
-      "photo": ""
+      "photo": "/photos/cocktail_amber_warm.jpg"
     },
     {
       "category": "SIGNATURE",
@@ -40,7 +40,7 @@
       "name": "CUPID'S ARROW",
       "desc": "Vodka, Triple Sec, Strawberry & Grenadine, Orange, Lime, Soda",
       "price": "120,000",
-      "photo": ""
+      "photo": "/photos/cocktail_red_topdown.jpg"
     },
     {
       "category": "SPECIAL",
