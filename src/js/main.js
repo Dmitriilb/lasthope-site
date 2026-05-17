@@ -10,7 +10,7 @@
 
 import '../css/main.css'
 import { initNav } from './nav.js'
-import { renderDrinks, renderEvents, renderReviews, renderGallery, renderHours, renderAboutPhoto } from './render.js'
+import { renderDrinks, renderEvents, renderReviews, renderGallery, renderHours, renderAboutPhoto, renderContacts } from './render.js'
 import { initFab } from './fab.js'
 import { initReveal, initHeroGlitch, initParallax } from './animations.js'
 import { initPromo } from './promo.js'
@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderReviews()
   renderGallery()
   renderHours()
+  renderContacts()
 
   // Add .reveal to all sections except hero
   document.querySelectorAll('.section, .promo-section').forEach(s => {

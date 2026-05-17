@@ -1,18 +1,23 @@
-﻿import promoData from '../data/promo.json'
+import promoData from '../data/promo.json'
 
 const PROMO_CODE = promoData.promo.code || 'WEAREHERE'
+const PROMO_DEAL = promoData.promo.deal || ''
+const PROMO_BODY = promoData.promo.body || 'Show up, say the code to the bartender.'
 
 export function initPromo() {
-  const revealBtn  = document.getElementById('promoRevealBtn')
+  const revealBtn   = document.getElementById('promoRevealBtn')
   const blurOverlay = document.getElementById('promoBlur')
-  const codeEl     = document.getElementById('promoCode')
-  const subEl      = document.getElementById('promoSub')
-  const copyBtn    = document.getElementById('promoCopyBtn')
+  const codeEl      = document.getElementById('promoCode')
+  const subEl       = document.getElementById('promoSub')
+  const copyBtn     = document.getElementById('promoCopyBtn')
+  const descEl      = document.getElementById('promoDesc')
 
   if (!revealBtn || !codeEl) return
 
-  // Set code text (single source of truth)
+  // ── Inject from promo.json (single source of truth) ──
   codeEl.textContent = PROMO_CODE
+  if (subEl)  subEl.textContent  = PROMO_DEAL
+  if (descEl) descEl.innerHTML   = PROMO_BODY.replace('\n', '<br>')
 
   let revealed = false
 
@@ -21,17 +26,11 @@ export function initPromo() {
     if (revealed) return
     revealed = true
 
-    // Hide overlay
     blurOverlay.classList.add('hidden')
-
-    // Animate code
     codeEl.classList.remove('blurred')
     codeEl.classList.add('revealed')
-
-    // Show subtitle
     subEl.classList.add('visible')
 
-    // Brief haptic on mobile
     if (navigator.vibrate) navigator.vibrate(40)
   }
 

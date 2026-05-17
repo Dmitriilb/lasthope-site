@@ -153,3 +153,80 @@ export function renderAboutPhoto() {
   if (aboutPhoto.alt) img.alt = aboutPhoto.alt
   if (aboutPhoto.label) frame.dataset.label = aboutPhoto.label
 }
+
+// ── Contacts (find-us section, footer, FAB) ──
+export function renderContacts() {
+  const info = barInfoData.barInfo
+
+  const igHandle   = info.instagram   ? `lasthope.247` : null
+  const igUrl      = info.instagram   ? `https://instagram.com/${info.instagram}` : null
+  const tgHandle   = info.telegram    ? info.telegram.replace('https://t.me/', '') : null
+  const tgUrl      = info.telegram    || null
+  const fbUrl      = info.facebook    || null
+  const mapsUrl    = info.mapsUrl     || null
+  const address    = info.address     ? info.address.replace(/, \d{6}$/, '') : null
+
+  // ── Find-us contact-block ──
+  const contactBlock = document.querySelector('.contact-block')
+  if (contactBlock) {
+    contactBlock.innerHTML = [
+      mapsUrl && address ? `
+        <a class="contact-row" href="${mapsUrl}" target="_blank" rel="noopener">
+          <span class="contact-icon">◎</span>
+          <span>${address}</span>
+        </a>` : '',
+      igUrl ? `
+        <a class="contact-row" href="${igUrl}" target="_blank" rel="noopener">
+          <span class="contact-icon">◈</span>
+          <span>Instagram • ${info.instagram}</span>
+        </a>` : '',
+      tgUrl ? `
+        <a class="contact-row" href="${tgUrl}" target="_blank" rel="noopener">
+          <span class="contact-icon">✆</span>
+          <span>Telegram • ${tgHandle}</span>
+        </a>` : '',
+      fbUrl ? `
+        <a class="contact-row" href="${fbUrl}" target="_blank" rel="noopener">
+          <span class="contact-icon">◉</span>
+          <span>Facebook • Last Hope</span>
+        </a>` : '',
+    ].join('')
+  }
+
+  // ── Footer social links ──
+  const footerLinks = document.querySelector('.footer-links')
+  if (footerLinks) {
+    footerLinks.innerHTML = [
+      igUrl  ? `<a href="${igUrl}"  target="_blank" rel="noopener">Instagram</a>` : '',
+      tgUrl  ? `<a href="${tgUrl}"  target="_blank" rel="noopener">Telegram</a>`  : '',
+      fbUrl  ? `<a href="${fbUrl}"  target="_blank" rel="noopener">Facebook</a>`  : '',
+    ].join('')
+  }
+
+  // ── FAB menu ──
+  const fabMenu = document.getElementById('fabMenu')
+  if (fabMenu) {
+    fabMenu.innerHTML = [
+      mapsUrl ? `
+        <a class="fab-item" href="${mapsUrl}" target="_blank" rel="noopener" aria-label="Google Maps">
+          <span class="fab-label">Maps</span>
+          <span class="fab-icon fab-icon--maps">◎</span>
+        </a>` : '',
+      igUrl ? `
+        <a class="fab-item" href="${igUrl}" target="_blank" rel="noopener" aria-label="Instagram">
+          <span class="fab-label">Instagram</span>
+          <span class="fab-icon fab-icon--ig">◈</span>
+        </a>` : '',
+      tgUrl ? `
+        <a class="fab-item" href="${tgUrl}" target="_blank" rel="noopener" aria-label="Telegram">
+          <span class="fab-label">Telegram</span>
+          <span class="fab-icon fab-icon--tg">✆</span>
+        </a>` : '',
+      fbUrl ? `
+        <a class="fab-item" href="${fbUrl}" target="_blank" rel="noopener" aria-label="Facebook">
+          <span class="fab-label">Facebook</span>
+          <span class="fab-icon fab-icon--fb">☰</span>
+        </a>` : '',
+    ].join('')
+  }
+}

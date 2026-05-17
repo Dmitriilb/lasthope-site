@@ -26,6 +26,7 @@ collections:
               - { label: "Google Maps URL", name: "mapsUrl", widget: "string" }
               - { label: "Instagram handle", name: "instagram", widget: "string" }
               - { label: "Telegram placeholder", name: "telegram", widget: "string" }
+              - { label: "Facebook URL", name: "facebook", widget: "string", required: false, hint: "Full Facebook page URL" }
 
   - name: "about_photo"
     label: "About photo"
