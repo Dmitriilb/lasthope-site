@@ -26,7 +26,7 @@ export function renderDrinks() {
 
   grid.innerHTML = defaultDrinks.map((d, i) => `
     <article class="drink-card${d.photo ? ' drink-card--has-photo' : ''}${i >= DRINKS_PREVIEW ? ' drink-hidden' : ''}" role="listitem" data-num="${String(i + 1).padStart(2, '0')}">
-      ${d.photo ? `<div class="drink-photo-wrap"><img class="drink-photo" src="${d.photo}" alt="${d.name}" loading="lazy" onerror="this.closest('.drink-photo-wrap').style.display='none'"></div>` : ''}
+      ${d.photo ? `<div class="drink-photo-wrap"><img class="drink-photo" src="${d.photo}" alt="${d.name}" loading="lazy" style="${d.photo_position ? `object-position: ${JSON.parse(d.photo_position).x}% ${JSON.parse(d.photo_position).y}%` : ''}" onerror="this.closest('.drink-photo-wrap').style.display='none'"></div>` : ''}
       <p class="drink-cat">${d.category}</p>
       <h3 class="drink-name">${d.name}</h3>
       <p class="drink-desc">${d.desc}</p>

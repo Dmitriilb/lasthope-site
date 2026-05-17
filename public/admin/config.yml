@@ -60,6 +60,7 @@ collections:
               - { label: "Description", name: "desc", widget: "text" }
               - { label: "Price", name: "price", widget: "string" }
               - { label: "Photo", name: "photo", widget: "image", allow_multiple: false, required: false, hint: "Optional. Upload a drink photo." }
+              - { label: "Focal point", name: "photo_position", widget: "focal-point", required: false, image_field: "photo", hint: "Click on the photo to set the focus area." }
 
   - name: "events"
     label: "Events"
